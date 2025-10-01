@@ -220,6 +220,251 @@
             border-left-color: #3498db;
         }
 
+        /* Cartes Héritage - Grid Layout */
+        .heritage-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .heritage-card {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(155, 89, 182, 0.1) 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid rgba(52, 152, 219, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .heritage-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .heritage-card:hover::before {
+            left: 100%;
+        }
+
+        .heritage-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(52, 152, 219, 0.4);
+            border-color: rgba(52, 152, 219, 0.6);
+        }
+
+        .heritage-card-wide {
+            grid-column: span 2;
+        }
+
+        @media (max-width: 768px) {
+            .heritage-card-wide {
+                grid-column: span 1;
+            }
+        }
+
+        .heritage-card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+            text-align: center;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+            transition: transform 0.3s;
+        }
+
+        .heritage-card:hover .heritage-card-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .heritage-card h3 {
+            color: #3498db;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            text-align: center;
+            transition: color 0.3s;
+        }
+
+        .heritage-card:hover h3 {
+            color: #9b59b6;
+        }
+
+        .heritage-card p {
+            line-height: 1.6;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .heritage-card code {
+            background: rgba(0,0,0,0.3);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            color: #f39c12;
+            font-weight: bold;
+        }
+
+        /* Titre Concepts Avancés */
+        .concepts-title {
+            text-align: center;
+            font-size: 2rem;
+            margin: 3rem 0 2rem 0;
+            color: #3498db;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .concepts-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #9b59b6);
+            border-radius: 2px;
+        }
+
+        /* Cartes Concepts Avancés */
+        .advanced-concepts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .advanced-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid rgba(255,255,255,0.1);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .advanced-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #3498db, #9b59b6, #e74c3c);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .advanced-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            border-color: rgba(52, 152, 219, 0.5);
+        }
+
+        .advanced-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .advanced-card-header {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.2), rgba(155, 89, 182, 0.2));
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: background 0.3s;
+        }
+
+        .advanced-card:hover .advanced-card-header {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.4), rgba(155, 89, 182, 0.4));
+        }
+
+        .advanced-card-icon {
+            font-size: 2.5rem;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+            transition: transform 0.3s;
+        }
+
+        .advanced-card:hover .advanced-card-icon {
+            transform: rotate(360deg) scale(1.1);
+        }
+
+        .advanced-card-header h4 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+        .advanced-card-content {
+            padding: 1.5rem;
+        }
+
+        .advanced-section {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.03);
+            transition: all 0.3s;
+        }
+
+        .advanced-section:hover {
+            background: rgba(255,255,255,0.08);
+            transform: translateX(5px);
+        }
+
+        .advanced-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .advanced-label {
+            display: inline-block;
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 0.5rem;
+            padding: 0.3rem 0.8rem;
+            background: rgba(52, 152, 219, 0.2);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .advanced-section:hover .advanced-label {
+            background: rgba(52, 152, 219, 0.4);
+            transform: scale(1.05);
+        }
+
+        .advanced-section p {
+            line-height: 1.7;
+            color: rgba(255,255,255,0.85);
+            margin-top: 0.5rem;
+        }
+
+        .advanced-section code {
+            background: rgba(0,0,0,0.4);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            color: #f39c12;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        .advanced-highlight {
+            border-left: 4px solid #f39c12;
+            background: linear-gradient(90deg, rgba(243, 156, 18, 0.1), transparent);
+        }
+
+        .advanced-highlight .advanced-label {
+            color: #f39c12;
+            background: rgba(243, 156, 18, 0.2);
+        }
+
+        .advanced-highlight:hover .advanced-label {
+            background: rgba(243, 156, 18, 0.4);
+        }
+
         /* Cartes d'information */
         .info-cards {
             display: grid;
@@ -1779,40 +2024,104 @@
                 </div>
             </div>
                 
-            <div class="concept-box">
-                <h3>L'héritage : réutiliser et spécialiser</h3>
-                <p><strong>Principe fondamental :</strong> L'héritage permet à une classe enfant d'acquérir automatiquement toutes les propriétés et méthodes de sa classe parente, tout en ayant la possibilité d'ajouter ses propres spécificités ou de modifier le comportement hérité.</p>
-                
-                <p><strong>Hiérarchie naturelle :</strong> Dans la nature comme en programmation, on observe des relations d'héritage. Un mammifère hérite des caractéristiques générales des vertébrés, mais ajoute ses spécificités (allaitement, poils). Un chien hérite des caractéristiques des mammifères mais ajoute ses comportements spécifiques.</p>
-                
-                <p><strong>Analogie professionnelle :</strong> Considérez la hiérarchie dans une entreprise. Un employé de base a certaines compétences et responsabilités. Un manager hérite de toutes ces compétences d'employé (il sait faire le travail de base) mais ajoute des compétences spécifiques (gestion d'équipe, planification). Un directeur hérite des compétences de manager et ajoute les siennes (stratégie, vision globale).</p>
-                
-                <p><strong>Redéfinition et spécialisation :</strong> Une classe enfant peut redéfinir le comportement d'une méthode héritée pour l'adapter à ses besoins spécifiques. C'est comme un chef cuisinier qui prend une recette de base et l'adapte selon son style et sa clientèle.</p>
-                
-                <p><strong>Exemple de projet de gestion documentaire :</strong> Vous avez une classe Document avec des propriétés générales (titre, auteur, dateCreation) et des méthodes communes (ouvrir, fermer, sauvegarder). Ensuite, DocumentPDF hérite de Document mais ajoute des méthodes spécifiques (compresser, protegerParMotDePasse). DocumentWord hérite aussi de Document mais redéfinit la méthode sauvegarder pour gérer les formats Word spécifiques.</p>
+            <!-- Cartes L'héritage -->
+            <div class="heritage-cards-grid">
+                <div class="heritage-card">
+                    <div class="heritage-card-icon">🎯</div>
+                    <h3>Principe fondamental</h3>
+                    <p>L'héritage permet à une classe enfant d'acquérir automatiquement toutes les propriétés et méthodes de sa classe parente, tout en ayant la possibilité d'ajouter ses propres spécificités ou de modifier le comportement hérité.</p>
+                </div>
+
+                <div class="heritage-card">
+                    <div class="heritage-card-icon">🌳</div>
+                    <h3>Hiérarchie naturelle</h3>
+                    <p>Dans la nature comme en programmation, on observe des relations d'héritage. Un mammifère hérite des caractéristiques générales des vertébrés, mais ajoute ses spécificités (allaitement, poils). Un chien hérite des caractéristiques des mammifères mais ajoute ses comportements spécifiques.</p>
+                </div>
+
+                <div class="heritage-card">
+                    <div class="heritage-card-icon">👔</div>
+                    <h3>Analogie professionnelle</h3>
+                    <p>Considérez la hiérarchie dans une entreprise. Un employé de base a certaines compétences et responsabilités. Un manager hérite de toutes ces compétences d'employé (il sait faire le travail de base) mais ajoute des compétences spécifiques (gestion d'équipe, planification).</p>
+                </div>
+
+                <div class="heritage-card">
+                    <div class="heritage-card-icon">👨‍🍳</div>
+                    <h3>Redéfinition et spécialisation</h3>
+                    <p>Une classe enfant peut redéfinir le comportement d'une méthode héritée pour l'adapter à ses besoins spécifiques. C'est comme un chef cuisinier qui prend une recette de base et l'adapte selon son style et sa clientèle.</p>
+                </div>
+
+                <div class="heritage-card heritage-card-wide">
+                    <div class="heritage-card-icon">📄</div>
+                    <h3>Exemple de projet de gestion documentaire</h3>
+                    <p>Vous avez une classe <code>Document</code> avec des propriétés générales (titre, auteur, dateCreation) et des méthodes communes (ouvrir, fermer, sauvegarder). Ensuite, <code>DocumentPDF</code> hérite de Document mais ajoute des méthodes spécifiques (compresser, protegerParMotDePasse). <code>DocumentWord</code> hérite aussi de Document mais redéfinit la méthode sauvegarder pour gérer les formats Word spécifiques.</p>
+                </div>
             </div>
 
-            <div class="concept-box">
-                <h3>Concepts avancés de la POO</h3>
-                
-                <h4>Le Polymorphisme</h4>
-                <p><strong>Définition :</strong> Le polymorphisme permet à des objets de différentes classes de répondre à la même méthode, mais chacun à sa manière. C'est la capacité d'un même nom de méthode à produire des comportements différents selon l'objet qui l'exécute.</p>
-                
-                <p><strong>Analogie de l'orchestre :</strong> Quand le chef d'orchestre dit "jouez", chaque musicien exécute cette instruction différemment : le pianiste appuie sur des touches, le violoniste passe l'archet, le trompettiste souffle. Même instruction, comportements différents selon l'instrument.</p>
-                
-                <p><strong>Avantage en projet :</strong> Dans un système de notification, vous pouvez avoir une méthode envoyer() commune à EmailNotification, SMSNotification, PushNotification. Chaque classe implémente cette méthode selon son canal, mais le code qui utilise ces objets n'a pas besoin de connaître les détails.</p>
+            <!-- Concepts Avancés POO -->
+            <h3 class="concepts-title">Concepts avancés de la POO</h3>
 
-                <h4>Classes abstraites</h4>
-                <p><strong>Concept :</strong> Une classe abstraite est un modèle incomplet qui ne peut pas être instancié directement. Elle définit une structure commune et impose certaines méthodes à ses classes filles, tout en pouvant fournir des implémentations partielles.</p>
-                
-                <p><strong>Analogie du patron couture :</strong> Un patron de vêtement est abstrait : il définit la forme générale mais vous devez choisir le tissu, les couleurs, les finitions pour créer un vêtement concret. Le patron impose certaines contraintes (emplacement des coutures) mais laisse des choix d'implémentation.</p>
+            <div class="advanced-concepts-grid">
+                <!-- Carte Polymorphisme -->
+                <div class="advanced-card">
+                    <div class="advanced-card-header">
+                        <div class="advanced-card-icon">🎭</div>
+                        <h4>Le Polymorphisme</h4>
+                    </div>
+                    <div class="advanced-card-content">
+                        <div class="advanced-section">
+                            <span class="advanced-label">Définition</span>
+                            <p>Le polymorphisme permet à des objets de différentes classes de répondre à la même méthode, mais chacun à sa manière. C'est la capacité d'un même nom de méthode à produire des comportements différents selon l'objet qui l'exécute.</p>
+                        </div>
+                        <div class="advanced-section">
+                            <span class="advanced-label">🎼 Analogie de l'orchestre</span>
+                            <p>Quand le chef d'orchestre dit "jouez", chaque musicien exécute cette instruction différemment : le pianiste appuie sur des touches, le violoniste passe l'archet, le trompettiste souffle. Même instruction, comportements différents selon l'instrument.</p>
+                        </div>
+                        <div class="advanced-section advanced-highlight">
+                            <span class="advanced-label">💡 Avantage en projet</span>
+                            <p>Dans un système de notification, vous pouvez avoir une méthode <code>envoyer()</code> commune à <code>EmailNotification</code>, <code>SMSNotification</code>, <code>PushNotification</code>. Chaque classe implémente cette méthode selon son canal, mais le code qui utilise ces objets n'a pas besoin de connaître les détails.</p>
+                        </div>
+                    </div>
+                </div>
 
-                <h4>Interfaces</h4>
-                <p><strong>Définition :</strong> Une interface définit un contrat : elle spécifie quelles méthodes une classe doit implémenter, sans fournir l'implémentation. C'est une garantie que toute classe qui "signe" ce contrat fournira certains services.</p>
-                
-                <p><strong>Analogie de la norme :</strong> Une prise électrique est une interface : elle définit un standard (forme, voltage) que tout appareil doit respecter pour se brancher. Peu importe comment l'appareil fonctionne à l'intérieur, s'il respecte l'interface, il peut se connecter au réseau.</p>
-                
-                <p><strong>Cas d'usage typique :</strong> Dans un système de paiement e-commerce, vous définissez une interface PaiementProcessor avec une méthode traiterPaiement(). Ensuite, PayPalProcessor, StripeProcessor, BankTransferProcessor implémentent cette interface, chacun à sa manière, mais le système de commande peut les utiliser de façon uniforme.</p>
+                <!-- Carte Classes abstraites -->
+                <div class="advanced-card">
+                    <div class="advanced-card-header">
+                        <div class="advanced-card-icon">📐</div>
+                        <h4>Classes abstraites</h4>
+                    </div>
+                    <div class="advanced-card-content">
+                        <div class="advanced-section">
+                            <span class="advanced-label">Concept</span>
+                            <p>Une classe abstraite est un modèle incomplet qui ne peut pas être instancié directement. Elle définit une structure commune et impose certaines méthodes à ses classes filles, tout en pouvant fournir des implémentations partielles.</p>
+                        </div>
+                        <div class="advanced-section">
+                            <span class="advanced-label">✂️ Analogie du patron couture</span>
+                            <p>Un patron de vêtement est abstrait : il définit la forme générale mais vous devez choisir le tissu, les couleurs, les finitions pour créer un vêtement concret. Le patron impose certaines contraintes (emplacement des coutures) mais laisse des choix d'implémentation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carte Interfaces -->
+                <div class="advanced-card">
+                    <div class="advanced-card-header">
+                        <div class="advanced-card-icon">🔌</div>
+                        <h4>Interfaces</h4>
+                    </div>
+                    <div class="advanced-card-content">
+                        <div class="advanced-section">
+                            <span class="advanced-label">Définition</span>
+                            <p>Une interface définit un contrat : elle spécifie quelles méthodes une classe doit implémenter, sans fournir l'implémentation. C'est une garantie que toute classe qui "signe" ce contrat fournira certains services.</p>
+                        </div>
+                        <div class="advanced-section">
+                            <span class="advanced-label">⚡ Analogie de la norme</span>
+                            <p>Une prise électrique est une interface : elle définit un standard (forme, voltage) que tout appareil doit respecter pour se brancher. Peu importe comment l'appareil fonctionne à l'intérieur, s'il respecte l'interface, il peut se connecter au réseau.</p>
+                        </div>
+                        <div class="advanced-section advanced-highlight">
+                            <span class="advanced-label">💡 Cas d'usage typique</span>
+                            <p>Dans un système de paiement e-commerce, vous définissez une interface <code>PaiementProcessor</code> avec une méthode <code>traiterPaiement()</code>. Ensuite, <code>PayPalProcessor</code>, <code>StripeProcessor</code>, <code>BankTransferProcessor</code> implémentent cette interface, chacun à sa manière, mais le système de commande peut les utiliser de façon uniforme.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
