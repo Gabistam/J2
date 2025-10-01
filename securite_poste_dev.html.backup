@@ -241,9 +241,9 @@
                     <div class="quiz-question">
                         <div class="question-text">1. Quel est le principe du "moindre privilège" ?</div>
                         <div class="quiz-options">
-                            <div class="quiz-option" onclick="selectAnswer(1, 1, false)">A) Partager ses mots de passe avec l'équipe</div>
-                            <div class="quiz-option" onclick="selectAnswer(1, 1, false)">B) Utiliser toujours un compte administrateur</div>
-                            <div class="quiz-option" onclick="selectAnswer(1, 1, true)">C) Utiliser les droits minimum nécessaires</div>
+                            <div class="quiz-option" onclick="selectAnswer(1, 1, false)">A) Utiliser toujours un compte administrateur</div>
+                            <div class="quiz-option" onclick="selectAnswer(1, 1, true)">B) Utiliser les droits minimum nécessaires</div>
+                            <div class="quiz-option" onclick="selectAnswer(1, 1, false)">C) Partager ses mots de passe avec l'équipe</div>
                         </div>
                         <div class="quiz-feedback">
                             <div class="feedback-text"></div>
@@ -253,9 +253,9 @@
                     <div class="quiz-question">
                         <div class="question-text">2. Que signifie "CIA" en sécurité informatique ?</div>
                         <div class="quiz-options">
-                            <div class="quiz-option" onclick="selectAnswer(1, 2, true)">A) Confidentialité, Intégrité, Disponibilité</div>
-                            <div class="quiz-option" onclick="selectAnswer(1, 2, false)">B) Cyber Intelligence Analysis</div>
-                            <div class="quiz-option" onclick="selectAnswer(1, 2, false)">C) Central Intelligence Agency</div>
+                            <div class="quiz-option" onclick="selectAnswer(1, 2, false)">A) Central Intelligence Agency</div>
+                            <div class="quiz-option" onclick="selectAnswer(1, 2, true)">B) Confidentialité, Intégrité, Disponibilité</div>
+                            <div class="quiz-option" onclick="selectAnswer(1, 2, false)">C) Cyber Intelligence Analysis</div>
                         </div>
                         <div class="quiz-feedback">
                             <div class="feedback-text"></div>
@@ -265,9 +265,9 @@
                     <div class="quiz-question">
                         <div class="question-text">3. Qu'est-ce qu'une "Supply Chain Attack" ?</div>
                         <div class="quiz-options">
-                            <div class="quiz-option" onclick="selectAnswer(1, 3, false)">A) Attaque par phishing email</div>
-                            <div class="quiz-option" onclick="selectAnswer(1, 3, false)">B) Attaque directe sur le serveur</div>
-                            <div class="quiz-option" onclick="selectAnswer(1, 3, true)">C) Attaque via des composants tiers (packages, libs)</div>
+                            <div class="quiz-option" onclick="selectAnswer(1, 3, false)">A) Attaque directe sur le serveur</div>
+                            <div class="quiz-option" onclick="selectAnswer(1, 3, true)">B) Attaque via des composants tiers (packages, libs)</div>
+                            <div class="quiz-option" onclick="selectAnswer(1, 3, false)">C) Attaque par phishing email</div>
                         </div>
                         <div class="quiz-feedback">
                             <div class="feedback-text"></div>
@@ -277,9 +277,9 @@
                     <div class="quiz-question">
                         <div class="question-text">4. Combien de pourcent des malwares peuvent être bloqués en évitant les comptes admin ?</div>
                         <div class="quiz-options">
-                            <div class="quiz-option" onclick="selectAnswer(1, 4, true)">A) 80%</div>
-                            <div class="quiz-option" onclick="selectAnswer(1, 4, false)">B) 95%</div>
-                            <div class="quiz-option" onclick="selectAnswer(1, 4, false)">C) 40%</div>
+                            <div class="quiz-option" onclick="selectAnswer(1, 4, false)">A) 40%</div>
+                            <div class="quiz-option" onclick="selectAnswer(1, 4, true)">B) 80%</div>
+                            <div class="quiz-option" onclick="selectAnswer(1, 4, false)">C) 95%</div>
                         </div>
                         <div class="quiz-feedback">
                             <div class="feedback-text"></div>
@@ -289,9 +289,9 @@
                     <div class="quiz-question">
                         <div class="question-text">5. Quelle est la meilleure pratique pour tester des outils suspects ?</div>
                         <div class="quiz-options">
-                            <div class="quiz-option" onclick="selectAnswer(1, 5, false)">A) Demander à un collègue de tester</div>
+                            <div class="quiz-option" onclick="selectAnswer(1, 5, false)">A) Les installer directement sur le PC principal</div>
                             <div class="quiz-option" onclick="selectAnswer(1, 5, true)">B) Utiliser une VM ou conteneur isolé</div>
-                            <div class="quiz-option" onclick="selectAnswer(1, 5, false)">C) Les installer directement sur le PC principal</div>
+                            <div class="quiz-option" onclick="selectAnswer(1, 5, false)">C) Demander à un collègue de tester</div>
                         </div>
                         <div class="quiz-feedback">
                             <div class="feedback-text"></div>
@@ -594,9 +594,9 @@ console.log("Login successful for user:", username);</div>
                     <div class="quiz-question">
                         <div class="question-text">1. Pour désactiver la télémétrie VS Code, quelle configuration utiliser ?</div>
                         <div class="quiz-options">
-                            <div class="quiz-option" onclick="selectAnswer(2, 1, false)">A) "privacy.enabled": false</div>
-                            <div class="quiz-option" onclick="selectAnswer(2, 1, false)">B) "tracking.disabled": true</div>
-                            <div class="quiz-option" onclick="selectAnswer(2, 1, true)">C) "telemetry.telemetryLevel": "off"</div>
+                            <div class="quiz-option" onclick="selectAnswer(2, 1, true)">A) "telemetry.telemetryLevel": "off"</div>
+                            <div class="quiz-option" onclick="selectAnswer(2, 1, false)">B) "privacy.enabled": false</div>
+                            <div class="quiz-option" onclick="selectAnswer(2, 1, false)">C) "tracking.disabled": true</div>
                         </div>
                         <div class="quiz-feedback">
                             <div class="feedback-text"></div>
@@ -606,8 +606,8 @@ console.log("Login successful for user:", username);</div>
                     <div class="quiz-question">
                         <div class="question-text">2. Avant d'installer une extension VS Code, il faut vérifier :</div>
                         <div class="quiz-options">
-                            <div class="quiz-option" onclick="selectAnswer(2, 2, true)">A) Téléchargements, notes, éditeur vérifié, dernière MAJ</div>
-                            <div class="quiz-option" onclick="selectAnswer(2, 2, false)">B) Uniquement le nom de l'extension</div>
+                            <div class="quiz-option" onclick="selectAnswer(2, 2, false)">A) Uniquement le nom de l'extension</div>
+                            <div class="quiz-option" onclick="selectAnswer(2, 2, true)">B) Téléchargements, notes, éditeur vérifié, dernière MAJ</div>
                             <div class="quiz-option" onclick="selectAnswer(2, 2, false)">C) Seulement la taille du fichier</div>
                         </div>
                         <div class="quiz-feedback">
@@ -618,9 +618,9 @@ console.log("Login successful for user:", username);</div>
                     <div class="quiz-question">
                         <div class="question-text">3. Où stocker les clés API dans un projet ?</div>
                         <div class="quiz-options">
-                            <div class="quiz-option" onclick="selectAnswer(2, 3, false)">A) Dans les commentaires du code</div>
-                            <div class="quiz-option" onclick="selectAnswer(2, 3, false)">B) Directement dans le code source</div>
-                            <div class="quiz-option" onclick="selectAnswer(2, 3, true)">C) Dans un fichier .env (ajouté au .gitignore)</div>
+                            <div class="quiz-option" onclick="selectAnswer(2, 3, false)">A) Directement dans le code source</div>
+                            <div class="quiz-option" onclick="selectAnswer(2, 3, true)">B) Dans un fichier .env (ajouté au .gitignore)</div>
+                            <div class="quiz-option" onclick="selectAnswer(2, 3, false)">C) Dans les commentaires du code</div>
                         </div>
                         <div class="quiz-feedback">
                             <div class="feedback-text"></div>
@@ -630,9 +630,9 @@ console.log("Login successful for user:", username);</div>
                     <div class="quiz-question">
                         <div class="question-text">4. Le "Workspace Trust" VS Code sert à :</div>
                         <div class="quiz-options">
-                            <div class="quiz-option" onclick="selectAnswer(2, 4, false)">A) Sauvegarder automatiquement le travail</div>
-                            <div class="quiz-option" onclick="selectAnswer(2, 4, false)">B) Partager des fichiers avec l'équipe</div>
-                            <div class="quiz-option" onclick="selectAnswer(2, 4, true)">C) Contrôler l'exécution de code dans les projets</div>
+                            <div class="quiz-option" onclick="selectAnswer(2, 4, false)">A) Partager des fichiers avec l'équipe</div>
+                            <div class="quiz-option" onclick="selectAnswer(2, 4, true)">B) Contrôler l'exécution de code dans les projets</div>
+                            <div class="quiz-option" onclick="selectAnswer(2, 4, false)">C) Sauvegarder automatiquement le travail</div>
                         </div>
                         <div class="quiz-feedback">
                             <div class="feedback-text"></div>
@@ -642,9 +642,9 @@ console.log("Login successful for user:", username);</div>
                     <div class="quiz-question">
                         <div class="question-text">5. SonarLint est une extension qui :</div>
                         <div class="quiz-options">
-                            <div class="quiz-option" onclick="selectAnswer(2, 5, false)">A) Change le thème de l'interface</div>
+                            <div class="quiz-option" onclick="selectAnswer(2, 5, false)">A) Améliore les performances de VS Code</div>
                             <div class="quiz-option" onclick="selectAnswer(2, 5, true)">B) Détecte les bugs et vulnérabilités de sécurité</div>
-                            <div class="quiz-option" onclick="selectAnswer(2, 5, false)">C) Améliore les performances de VS Code</div>
+                            <div class="quiz-option" onclick="selectAnswer(2, 5, false)">C) Change le thème de l'interface</div>
                         </div>
                         <div class="quiz-feedback">
                             <div class="feedback-text"></div>
@@ -1002,9 +1002,9 @@ softwareupdate -l</div>
                     <div class="quiz-question">
                         <div class="question-text">1. Quel pourcentage de malwares peut être bloqué en utilisant un compte utilisateur standard ?</div>
                         <div class="quiz-options">
-                            <div class="quiz-option" onclick="selectAnswer(3, 1, false)">A) 95%</div>
-                            <div class="quiz-option" onclick="selectAnswer(3, 1, false)">B) 50%</div>
-                            <div class="quiz-option" onclick="selectAnswer(3, 1, true)">C) 80%</div>
+                            <div class="quiz-option" onclick="selectAnswer(3, 1, false)">A) 50%</div>
+                            <div class="quiz-option" onclick="selectAnswer(3, 1, true)">B) 80%</div>
+                            <div class="quiz-option" onclick="selectAnswer(3, 1, false)">C) 95%</div>
                         </div>
                         <div class="quiz-feedback">
                             <div class="feedback-text"></div>
@@ -1014,9 +1014,9 @@ softwareupdate -l</div>
                     <div class="quiz-question">
                         <div class="question-text">2. Sur macOS, FileVault sert à :</div>
                         <div class="quiz-options">
-                            <div class="quiz-option" onclick="selectAnswer(3, 2, true)">A) Chiffrer le disque dur</div>
-                            <div class="quiz-option" onclick="selectAnswer(3, 2, false)">B) Bloquer les publicités</div>
-                            <div class="quiz-option" onclick="selectAnswer(3, 2, false)">C) Gérer les mots de passe</div>
+                            <div class="quiz-option" onclick="selectAnswer(3, 2, false)">A) Gérer les mots de passe</div>
+                            <div class="quiz-option" onclick="selectAnswer(3, 2, true)">B) Chiffrer le disque dur</div>
+                            <div class="quiz-option" onclick="selectAnswer(3, 2, false)">C) Bloquer les publicités</div>
                         </div>
                         <div class="quiz-feedback">
                             <div class="feedback-text"></div>
@@ -1026,9 +1026,9 @@ softwareupdate -l</div>
                     <div class="quiz-question">
                         <div class="question-text">3. UAC sur Windows demande confirmation pour :</div>
                         <div class="quiz-options">
-                            <div class="quiz-option" onclick="selectAnswer(3, 3, false)">A) L'ouverture de fichiers</div>
-                            <div class="quiz-option" onclick="selectAnswer(3, 3, false)">B) Toutes les actions utilisateur</div>
-                            <div class="quiz-option" onclick="selectAnswer(3, 3, true)">C) Les actions nécessitant des privilèges administrateur</div>
+                            <div class="quiz-option" onclick="selectAnswer(3, 3, false)">A) Toutes les actions utilisateur</div>
+                            <div class="quiz-option" onclick="selectAnswer(3, 3, true)">B) Les actions nécessitant des privilèges administrateur</div>
+                            <div class="quiz-option" onclick="selectAnswer(3, 3, false)">C) L'ouverture de fichiers</div>
                         </div>
                         <div class="quiz-feedback">
                             <div class="feedback-text"></div>
@@ -1038,9 +1038,9 @@ softwareupdate -l</div>
                     <div class="quiz-question">
                         <div class="question-text">4. Quel gestionnaire de mots de passe gratuit est recommandé ?</div>
                         <div class="quiz-options">
-                            <div class="quiz-option" onclick="selectAnswer(3, 4, false)">A) Excel</div>
-                            <div class="quiz-option" onclick="selectAnswer(3, 4, true)">B) Bitwarden</div>
-                            <div class="quiz-option" onclick="selectAnswer(3, 4, false)">C) Notepad</div>
+                            <div class="quiz-option" onclick="selectAnswer(3, 4, true)">A) Bitwarden</div>
+                            <div class="quiz-option" onclick="selectAnswer(3, 4, false)">B) Notepad</div>
+                            <div class="quiz-option" onclick="selectAnswer(3, 4, false)">C) Excel</div>
                         </div>
                         <div class="quiz-feedback">
                             <div class="feedback-text"></div>
@@ -1050,9 +1050,9 @@ softwareupdate -l</div>
                     <div class="quiz-question">
                         <div class="question-text">5. La "défense en profondeur" signifie :</div>
                         <div class="quiz-options">
-                            <div class="quiz-option" onclick="selectAnswer(3, 5, false)">A) Cacher son ordinateur</div>
-                            <div class="quiz-option" onclick="selectAnswer(3, 5, false)">B) Utiliser un seul antivirus très puissant</div>
-                            <div class="quiz-option" onclick="selectAnswer(3, 5, true)">C) Multiplier les couches de protection</div>
+                            <div class="quiz-option" onclick="selectAnswer(3, 5, false)">A) Utiliser un seul antivirus très puissant</div>
+                            <div class="quiz-option" onclick="selectAnswer(3, 5, true)">B) Multiplier les couches de protection</div>
+                            <div class="quiz-option" onclick="selectAnswer(3, 5, false)">C) Cacher son ordinateur</div>
                         </div>
                         <div class="quiz-feedback">
                             <div class="feedback-text"></div>
@@ -1400,9 +1400,9 @@ sudo ufw status verbose</div>
                     <div class="quiz-question">
                         <div class="question-text">1. Quel pourcentage des serveurs web utilisent Linux ?</div>
                         <div class="quiz-options">
-                            <div class="quiz-option" onclick="selectAnswer(4, 1, true)">A) 96%</div>
-                            <div class="quiz-option" onclick="selectAnswer(4, 1, false)">B) 50%</div>
-                            <div class="quiz-option" onclick="selectAnswer(4, 1, false)">C) 76%</div>
+                            <div class="quiz-option" onclick="selectAnswer(4, 1, false)">A) 50%</div>
+                            <div class="quiz-option" onclick="selectAnswer(4, 1, false)">B) 76%</div>
+                            <div class="quiz-option" onclick="selectAnswer(4, 1, true)">C) 96%</div>
                         </div>
                         <div class="quiz-feedback">
                             <div class="feedback-text"></div>
@@ -1412,9 +1412,9 @@ sudo ufw status verbose</div>
                     <div class="quiz-question">
                         <div class="question-text">2. Quelle distribution Linux est recommandée pour débuter ?</div>
                         <div class="quiz-options">
-                            <div class="quiz-option" onclick="selectAnswer(4, 2, false)">A) Gentoo</div>
-                            <div class="quiz-option" onclick="selectAnswer(4, 2, false)">B) Arch Linux</div>
-                            <div class="quiz-option" onclick="selectAnswer(4, 2, true)">C) Ubuntu ou Linux Mint</div>
+                            <div class="quiz-option" onclick="selectAnswer(4, 2, false)">A) Arch Linux</div>
+                            <div class="quiz-option" onclick="selectAnswer(4, 2, true)">B) Ubuntu ou Linux Mint</div>
+                            <div class="quiz-option" onclick="selectAnswer(4, 2, false)">C) Gentoo</div>
                         </div>
                         <div class="quiz-feedback">
                             <div class="feedback-text"></div>
@@ -1424,9 +1424,9 @@ sudo ufw status verbose</div>
                     <div class="quiz-question">
                         <div class="question-text">3. La commande 'sudo' permet de :</div>
                         <div class="quiz-options">
-                            <div class="quiz-option" onclick="selectAnswer(4, 3, true)">A) Exécuter des commandes avec droits administrateur</div>
-                            <div class="quiz-option" onclick="selectAnswer(4, 3, false)">B) Éditer des fichiers texte</div>
-                            <div class="quiz-option" onclick="selectAnswer(4, 3, false)">C) Naviguer dans les dossiers</div>
+                            <div class="quiz-option" onclick="selectAnswer(4, 3, false)">A) Naviguer dans les dossiers</div>
+                            <div class="quiz-option" onclick="selectAnswer(4, 3, true)">B) Exécuter des commandes avec droits administrateur</div>
+                            <div class="quiz-option" onclick="selectAnswer(4, 3, false)">C) Éditer des fichiers texte</div>
                         </div>
                         <div class="quiz-feedback">
                             <div class="feedback-text"></div>
@@ -1436,9 +1436,9 @@ sudo ufw status verbose</div>
                     <div class="quiz-question">
                         <div class="question-text">4. UFW sur Ubuntu est :</div>
                         <div class="quiz-options">
-                            <div class="quiz-option" onclick="selectAnswer(4, 4, false)">A) Un gestionnaire de paquets</div>
-                            <div class="quiz-option" onclick="selectAnswer(4, 4, false)">B) Un éditeur de texte</div>
-                            <div class="quiz-option" onclick="selectAnswer(4, 4, true)">C) Un pare-feu simplifié</div>
+                            <div class="quiz-option" onclick="selectAnswer(4, 4, false)">A) Un éditeur de texte</div>
+                            <div class="quiz-option" onclick="selectAnswer(4, 4, true)">B) Un pare-feu simplifié</div>
+                            <div class="quiz-option" onclick="selectAnswer(4, 4, false)">C) Un gestionnaire de paquets</div>
                         </div>
                         <div class="quiz-feedback">
                             <div class="feedback-text"></div>
@@ -1448,9 +1448,9 @@ sudo ufw status verbose</div>
                     <div class="quiz-question">
                         <div class="question-text">5. Pourquoi Linux est-il moins ciblé par les malwares ?</div>
                         <div class="quiz-options">
-                            <div class="quiz-option" onclick="selectAnswer(4, 5, true)">A) Part de marché desktop plus faible (3% vs 76% Windows)</div>
-                            <div class="quiz-option" onclick="selectAnswer(4, 5, false)">B) Il n'a pas internet</div>
-                            <div class="quiz-option" onclick="selectAnswer(4, 5, false)">C) Il est immunisé contre les virus</div>
+                            <div class="quiz-option" onclick="selectAnswer(4, 5, false)">A) Il est immunisé contre les virus</div>
+                            <div class="quiz-option" onclick="selectAnswer(4, 5, true)">B) Part de marché desktop plus faible (3% vs 76% Windows)</div>
+                            <div class="quiz-option" onclick="selectAnswer(4, 5, false)">C) Il n'a pas internet</div>
                         </div>
                         <div class="quiz-feedback">
                             <div class="feedback-text"></div>
@@ -1828,9 +1828,9 @@ sudo ufw status verbose</div>
                     <div class="quiz-question">
                         <div class="question-text">1. Quel pourcentage d'attaques par compromission de compte sont bloquées par MFA ?</div>
                         <div class="quiz-options">
-                            <div class="quiz-option" onclick="selectAnswer(5, 1, false)">A) 95%</div>
-                            <div class="quiz-option" onclick="selectAnswer(5, 1, true)">B) 99.9%</div>
-                            <div class="quiz-option" onclick="selectAnswer(5, 1, false)">C) 80%</div>
+                            <div class="quiz-option" onclick="selectAnswer(5, 1, false)">A) 80%</div>
+                            <div class="quiz-option" onclick="selectAnswer(5, 1, false)">B) 95%</div>
+                            <div class="quiz-option" onclick="selectAnswer(5, 1, true)">C) 99.9%</div>
                         </div>
                         <div class="quiz-feedback">
                             <div class="feedback-text"></div>
@@ -1840,9 +1840,9 @@ sudo ufw status verbose</div>
                     <div class="quiz-question">
                         <div class="question-text">2. Quelle méthode MFA est la plus résistante au phishing ?</div>
                         <div class="quiz-options">
-                            <div class="quiz-option" onclick="selectAnswer(5, 2, true)">A) Hardware token (YubiKey)</div>
-                            <div class="quiz-option" onclick="selectAnswer(5, 2, false)">B) SMS</div>
-                            <div class="quiz-option" onclick="selectAnswer(5, 2, false)">C) TOTP (Google Authenticator)</div>
+                            <div class="quiz-option" onclick="selectAnswer(5, 2, false)">A) SMS</div>
+                            <div class="quiz-option" onclick="selectAnswer(5, 2, false)">B) TOTP (Google Authenticator)</div>
+                            <div class="quiz-option" onclick="selectAnswer(5, 2, true)">C) Hardware token (YubiKey)</div>
                         </div>
                         <div class="quiz-feedback">
                             <div class="feedback-text"></div>
@@ -1852,9 +1852,9 @@ sudo ufw status verbose</div>
                     <div class="quiz-question">
                         <div class="question-text">3. Les 3 facteurs d'authentification sont :</div>
                         <div class="quiz-options">
-                            <div class="quiz-option" onclick="selectAnswer(5, 3, false)">A) Simple, double, triple</div>
-                            <div class="quiz-option" onclick="selectAnswer(5, 3, true)">B) Ce que vous savez, avez, êtes</div>
-                            <div class="quiz-option" onclick="selectAnswer(5, 3, false)">C) Mot de passe, email, téléphone</div>
+                            <div class="quiz-option" onclick="selectAnswer(5, 3, true)">A) Ce que vous savez, avez, êtes</div>
+                            <div class="quiz-option" onclick="selectAnswer(5, 3, false)">B) Mot de passe, email, téléphone</div>
+                            <div class="quiz-option" onclick="selectAnswer(5, 3, false)">C) Simple, double, triple</div>
                         </div>
                         <div class="quiz-feedback">
                             <div class="feedback-text"></div>
@@ -1864,9 +1864,9 @@ sudo ufw status verbose</div>
                     <div class="quiz-question">
                         <div class="question-text">4. Pourquoi éviter SMS pour MFA quand possible ?</div>
                         <div class="quiz-options">
-                            <div class="quiz-option" onclick="selectAnswer(5, 4, true)">A) Vulnérable au SIM swapping</div>
-                            <div class="quiz-option" onclick="selectAnswer(5, 4, false)">B) Ça coûte trop cher</div>
-                            <div class="quiz-option" onclick="selectAnswer(5, 4, false)">C) C'est trop compliqué</div>
+                            <div class="quiz-option" onclick="selectAnswer(5, 4, false)">A) C'est trop compliqué</div>
+                            <div class="quiz-option" onclick="selectAnswer(5, 4, true)">B) Vulnérable au SIM swapping</div>
+                            <div class="quiz-option" onclick="selectAnswer(5, 4, false)">C) Ça coûte trop cher</div>
                         </div>
                         <div class="quiz-feedback">
                             <div class="feedback-text"></div>
@@ -1876,9 +1876,9 @@ sudo ufw status verbose</div>
                     <div class="quiz-question">
                         <div class="question-text">5. Que faire des codes de récupération MFA ?</div>
                         <div class="quiz-options">
-                            <div class="quiz-option" onclick="selectAnswer(5, 5, false)">A) Les stocker dans son email</div>
-                            <div class="quiz-option" onclick="selectAnswer(5, 5, true)">B) Les imprimer et stocker en lieu sûr</div>
-                            <div class="quiz-option" onclick="selectAnswer(5, 5, false)">C) Les ignorer</div>
+                            <div class="quiz-option" onclick="selectAnswer(5, 5, false)">A) Les ignorer</div>
+                            <div class="quiz-option" onclick="selectAnswer(5, 5, false)">B) Les stocker dans son email</div>
+                            <div class="quiz-option" onclick="selectAnswer(5, 5, true)">C) Les imprimer et stocker en lieu sûr</div>
                         </div>
                         <div class="quiz-feedback">
                             <div class="feedback-text"></div>
@@ -2250,9 +2250,9 @@ secrets/</div>
                     <div class="quiz-question">
                         <div class="question-text">1. Pour un usage quotidien, il faut utiliser :</div>
                         <div class="quiz-options">
-                            <div class="quiz-option" onclick="selectAnswer(6, 1, false)">A) Le compte invité</div>
-                            <div class="quiz-option" onclick="selectAnswer(6, 1, false)">B) Toujours un compte administrateur</div>
-                            <div class="quiz-option" onclick="selectAnswer(6, 1, true)">C) Un compte utilisateur standard</div>
+                            <div class="quiz-option" onclick="selectAnswer(6, 1, false)">A) Toujours un compte administrateur</div>
+                            <div class="quiz-option" onclick="selectAnswer(6, 1, true)">B) Un compte utilisateur standard</div>
+                            <div class="quiz-option" onclick="selectAnswer(6, 1, false)">C) Le compte invité</div>
                         </div>
                         <div class="quiz-feedback">
                             <div class="feedback-text"></div>
@@ -2262,9 +2262,9 @@ secrets/</div>
                     <div class="quiz-question">
                         <div class="question-text">2. Où stocker les clés API dans un projet ?</div>
                         <div class="quiz-options">
-                            <div class="quiz-option" onclick="selectAnswer(6, 2, true)">A) Dans un fichier .env ajouté au .gitignore</div>
-                            <div class="quiz-option" onclick="selectAnswer(6, 2, false)">B) Dans les commentaires du code</div>
-                            <div class="quiz-option" onclick="selectAnswer(6, 2, false)">C) Directement dans le code source</div>
+                            <div class="quiz-option" onclick="selectAnswer(6, 2, false)">A) Directement dans le code source</div>
+                            <div class="quiz-option" onclick="selectAnswer(6, 2, true)">B) Dans un fichier .env ajouté au .gitignore</div>
+                            <div class="quiz-option" onclick="selectAnswer(6, 2, false)">C) Dans les commentaires du code</div>
                         </div>
                         <div class="quiz-feedback">
                             <div class="feedback-text"></div>
@@ -2274,9 +2274,9 @@ secrets/</div>
                     <div class="quiz-question">
                         <div class="question-text">3. Pour GitHub, l'authentification la plus sécurisée est :</div>
                         <div class="quiz-options">
-                            <div class="quiz-option" onclick="selectAnswer(6, 3, false)">A) Token personnel uniquement</div>
-                            <div class="quiz-option" onclick="selectAnswer(6, 3, false)">B) Mot de passe uniquement</div>
-                            <div class="quiz-option" onclick="selectAnswer(6, 3, true)">C) Clé SSH + MFA</div>
+                            <div class="quiz-option" onclick="selectAnswer(6, 3, false)">A) Mot de passe uniquement</div>
+                            <div class="quiz-option" onclick="selectAnswer(6, 3, true)">B) Clé SSH + MFA</div>
+                            <div class="quiz-option" onclick="selectAnswer(6, 3, false)">C) Token personnel uniquement</div>
                         </div>
                         <div class="quiz-feedback">
                             <div class="feedback-text"></div>
@@ -2286,9 +2286,9 @@ secrets/</div>
                     <div class="quiz-question">
                         <div class="question-text">4. BitLocker sur Windows sert à :</div>
                         <div class="quiz-options">
-                            <div class="quiz-option" onclick="selectAnswer(6, 4, true)">A) Chiffrer le disque dur</div>
-                            <div class="quiz-option" onclick="selectAnswer(6, 4, false)">B) Accélérer le système</div>
-                            <div class="quiz-option" onclick="selectAnswer(6, 4, false)">C) Bloquer les publicités</div>
+                            <div class="quiz-option" onclick="selectAnswer(6, 4, false)">A) Bloquer les publicités</div>
+                            <div class="quiz-option" onclick="selectAnswer(6, 4, true)">B) Chiffrer le disque dur</div>
+                            <div class="quiz-option" onclick="selectAnswer(6, 4, false)">C) Accélérer le système</div>
                         </div>
                         <div class="quiz-feedback">
                             <div class="feedback-text"></div>
