@@ -1,0 +1,2052 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POO Avancée et Design Patterns - BTS SIO SLAM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        /* Navigation fixe */
+        .nav-fixed {
+            background: #34495e;
+            padding: 1rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-title {
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-1px);
+        }
+
+        /* Titre principal */
+        .hero-title {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 4rem 2rem 2rem 2rem;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-top: 80px;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-subtitle {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: rgba(255,255,255,0.9);
+            text-align: center;
+            font-size: 1.2rem;
+            padding: 0 2rem 2rem 2rem;
+        }
+
+        /* Sections */
+        .section {
+            margin: 2rem;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .intro-section {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #333;
+        }
+
+        .patterns-section {
+            background: linear-gradient(135deg, #ff9a56 0%, #ff6b6b 100%);
+            color: white;
+        }
+
+        .poo-section {
+            background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+            color: white;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 3px solid rgba(255,255,255,0.3);
+            padding-bottom: 0.5rem;
+        }
+
+        .intro-section h2 {
+            border-bottom-color: #3498db;
+            color: #2c3e50;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem 0;
+            color: #2c3e50;
+        }
+
+        .patterns-section h3,
+        .poo-section h3 {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .intro-section h3 {
+            color: #2c3e50;
+        }
+
+        /* Introductions déroulantes */
+        .intro-dropdown {
+            margin: 2rem 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .intro-header {
+            background: rgba(0,0,0,0.1);
+            padding: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .intro-header:hover {
+            background: rgba(0,0,0,0.15);
+        }
+
+        .intro-arrow {
+            transition: transform 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .intro-arrow.open {
+            transform: rotate(180deg);
+        }
+
+        .intro-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .intro-content.open {
+            max-height: 1000px;
+            transition: max-height 0.5s ease-in;
+        }
+
+        .intro-text {
+            padding: 1.5rem;
+        }
+
+        .intro-highlight {
+            background: rgba(255,255,255,0.2);
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            border-left: 4px solid rgba(255,255,255,0.5);
+        }
+
+        .intro-section .intro-highlight {
+            background: rgba(52, 152, 219, 0.1);
+            border-left-color: #3498db;
+        }
+
+        /* Boîtes de concept */
+        .concept-box {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border-left: 4px solid rgba(255,255,255,0.5);
+        }
+
+        .intro-section .concept-box {
+            background: rgba(0,0,0,0.05);
+            border-left-color: #3498db;
+        }
+
+        /* Cartes d'information */
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .info-card {
+            background: rgba(255,255,255,0.15);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .intro-section .info-card {
+            background: white;
+            border: 1px solid #e3f2fd;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.8rem;
+            color: inherit;
+        }
+
+        .card-content {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Comparaisons côte à côte */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .comparison-card {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 2px solid transparent;
+        }
+
+        .comparison-card.before {
+            border-color: #e74c3c;
+            background: rgba(231, 76, 60, 0.1);
+        }
+
+        .comparison-card.after {
+            border-color: #27ae60;
+            background: rgba(39, 174, 96, 0.1);
+        }
+
+        .intro-section .comparison-card.before {
+            background: rgba(231, 76, 60, 0.05);
+        }
+
+        .intro-section .comparison-card.after {
+            background: rgba(39, 174, 96, 0.05);
+        }
+
+        /* Points clés avec icônes */
+        .key-points {
+            display: grid;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .key-point {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.08);
+            border-radius: 8px;
+            border-left: 3px solid rgba(255,255,255,0.3);
+        }
+
+        .intro-section .key-point {
+            background: rgba(52, 152, 219, 0.05);
+            border-left-color: #3498db;
+        }
+
+        .key-point-icon {
+            font-size: 1.5rem;
+            min-width: 2rem;
+        }
+
+        .key-point-text {
+            flex: 1;
+            font-size: 0.95rem;
+        }
+
+        /* Espacements améliorés */
+        .spaced-content > * {
+            margin-bottom: 2rem;
+        }
+
+        .spaced-content > *:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Responsive pour les cartes */
+        @media (max-width: 768px) {
+            .info-cards {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .comparison-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        /* Schémas et diagrammes */
+        .schema {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            text-align: center;
+            color: #333;
+        }
+
+        .mvc-diagram, .dao-diagram, .singleton-diagram {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .diagram-box {
+            background: #3498db;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 0.5rem;
+            min-width: 120px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .diagram-box:hover {
+            transform: translateY(-3px);
+        }
+
+        .model { background: #e74c3c; }
+        .view { background: #2ecc71; }
+        .controller { background: #f39c12; }
+        .dao { background: #9b59b6; }
+        .database { background: #34495e; }
+        .singleton { background: #e67e22; }
+
+        .arrow {
+            font-size: 1.5rem;
+            color: #3498db;
+            margin: 0 1rem;
+        }
+
+        /* Exemples de code */
+        .code-example {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .code-comparison {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .code-block {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .code-header {
+            padding: 0.8rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .bad-code .code-header {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .good-code .code-header {
+            background: #27ae60;
+            color: white;
+        }
+
+        .code-content {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            line-height: 1.4;
+        }
+
+        /* Quiz interactifs */
+        .quiz-container {
+            margin: 2rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .quiz-header {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            padding: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            color: #333;
+            transition: background 0.3s;
+        }
+
+        .quiz-header:hover {
+            background: linear-gradient(135deg, #fdcb6e 0%, #e84393 100%);
+        }
+
+        .quiz-arrow {
+            transition: transform 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .quiz-arrow.open {
+            transform: rotate(180deg);
+        }
+
+        .quiz-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: #f8f9fa;
+        }
+
+        .quiz-content.open {
+            max-height: 2000px;
+            transition: max-height 0.5s ease-in;
+        }
+
+        .quiz-question {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .quiz-option {
+            background: white;
+            padding: 0.8rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .quiz-option:hover {
+            background: #e3f2fd;
+            transform: translateX(5px);
+        }
+
+        .quiz-option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        .quiz-option.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+
+        .quiz-feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 5px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s;
+        }
+
+        .quiz-feedback.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .quiz-feedback.feedback-correct {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .quiz-feedback.feedback-incorrect {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        .quiz-score {
+            padding: 1.5rem;
+            text-align: center;
+            background: #e3f2fd;
+            border-top: 1px solid #e9ecef;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.5s;
+        }
+
+        .quiz-score.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Alertes */
+        .alert {
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            border: 1px solid transparent;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .alert-icon {
+            font-size: 1.2rem;
+            margin-top: 0.2rem;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            border-color: #bee5eb;
+            color: #0c5460;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            border-color: #ffeaa7;
+            color: #856404;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+
+        .alert-danger {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+
+        /* Badges et objectifs */
+        .objectives {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .objective-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .objective-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-top: 0.5rem;
+            display: inline-block;
+        }
+
+        .badge-beginner {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .badge-intermediate {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .badge-advanced {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                justify-content: center;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+                padding-top: 6rem;
+            }
+
+            .section {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            .mvc-diagram, .dao-diagram, .singleton-diagram {
+                flex-direction: column;
+            }
+            
+            .arrow {
+                transform: rotate(90deg);
+            }
+
+            .code-comparison {
+                flex-direction: column;
+            }
+
+            .objectives {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation fixe -->
+    <nav class="nav-fixed">
+        <div class="nav-container">
+            <div class="nav-title">🎓 POO Avancée & Design Patterns - BTS SIO SLAM</div>
+            <div class="nav-links">
+                <a href="#objectifs">Objectifs</a>
+                <a href="#patterns">Design Patterns</a>
+                <a href="#mvc">MVC</a>
+                <a href="#dao">DAO</a>
+                <a href="#singleton">Singleton</a>
+                <a href="#poo">POO en PHP</a>
+                <a href="#classes">Classes & Objets</a>
+                <a href="#encapsulation">Encapsulation</a>
+                <a href="#heritage">Héritage</a>
+                <a href="#ressources">Ressources</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Titre principal -->
+        <h1 class="hero-title">🗂️ POO Avancée & Design Patterns</h1>
+        <p class="hero-subtitle">Développement Web Professionnel - BTS SIO SLAM</p>
+
+        <!-- Section Objectifs -->
+        <div id="objectifs" class="section intro-section">
+            <h2>🎯 Objectifs pédagogiques</h2>
+            <div class="objectives">
+                <div class="objective-card">
+                    <h3>🗂️ Maîtriser</h3>
+                    <p>Les design patterns essentiels MVC, DAO, Singleton</p>
+                    <span class="badge badge-intermediate">Intermédiaire</span>
+                </div>
+                <div class="objective-card">
+                    <h3>🎯 Appliquer</h3>
+                    <p>La POO en PHP avec classes, objets et encapsulation</p>
+                    <span class="badge badge-beginner">Débutant</span>
+                </div>
+                <div class="objective-card">
+                    <h3>🛡️ Sécuriser</h3>
+                    <p>Son code avec les bonnes pratiques orientées objet</p>
+                    <span class="badge badge-intermediate">Intermédiaire</span>
+                </div>
+                <div class="objective-card">
+                    <h3>🚀 Préparer</h3>
+                    <p>L'utilisation de frameworks modernes (Laravel, Symfony)</p>
+                    <span class="badge badge-advanced">Avancé</span>
+                </div>
+            </div>
+
+            <div class="concept-box">
+                <h3>Pourquoi la POO et les Design Patterns ?</h3>
+                <p><strong>Dans le développement web moderne</strong>, vous travaillerez avec des frameworks comme <strong>Symfony, Laravel, CodeIgniter</strong> qui utilisent tous ces concepts.</p>
+                
+                <p><strong>Langages supportant la POO :</strong></p>
+                <ul style="margin-left: 2rem; margin-top: 1rem;">
+                    <li><strong>PHP</strong> - Notre focus (syntaxe accessible, largement utilisé en web)</li>
+                    <li><strong>Java</strong> - POO pure, très structurée</li>
+                    <li><strong>C#</strong> - POO avec .NET, similaire à Java</li>
+                    <li><strong>Python</strong> - POO flexible et intuitive</li>
+                    <li><strong>JavaScript</strong> - POO prototypale puis classes (ES6+)</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h3>Programme du cours</h3>
+                <p><strong>Partie 1 :</strong> Design Patterns théoriques + schémas</p>
+                <p><strong>Partie 2 :</strong> POO en PHP avec exemples pratiques</p>
+            </div>
+
+            <div class="alert alert-info">
+                <div class="alert-icon">💡</div>
+                <div>
+                    <strong>Prérequis :</strong> Connaissance de base de PHP (variables, boucles, fonctions). 
+                    <strong>Environnement :</strong> XAMPP/WAMP/MAMP + VS Code installés.
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 1: Design Patterns -->
+        <div id="patterns" class="section patterns-section">
+            <h2>🗂️ Design Patterns Essentiels</h2>
+
+            <div class="intro-dropdown">
+                <div class="intro-header" onclick="toggleIntro(1)">
+                    💡 Points-clés avant de commencer : Solutions éprouvées aux problèmes récurrents
+                    <span class="intro-arrow">▼</span>
+                </div>
+                <div id="intro1" class="intro-content">
+                    <div class="intro-text">
+                        <p><strong>🎯 Objectif :</strong> Maîtriser les 3 patterns incontournables du développement web pour créer un code maintenable et professionnel.</p>
+
+                        <h4>⚡ Points-clés à retenir :</h4>
+                        <ul>
+                            <li><strong>Design Pattern</strong> = recette de cuisine que tous les développeurs connaissent</li>
+                            <li><strong>MVC</strong> = sépare présentation/logique/données (utilisé par Laravel, Symfony, tous les frameworks)</li>
+                            <li><strong>DAO</strong> = abstrait l'accès aux données (changement de DB transparent)</li>
+                            <li><strong>Singleton</strong> = une seule instance (parfait pour connexions DB, configuration)</li>
+                        </ul>
+
+                        <h4>🔗 Dans votre métier :</h4>
+                        <p>Ces patterns sont utilisés dans 90% des projets web professionnels. Les maîtriser vous rend immédiatement plus employable et facilite l'apprentissage des frameworks.</p>
+
+                        <div class="intro-highlight">
+                            <strong>🎯 Message-clé :</strong><br>
+                            "Un Design Pattern = une solution reconnue à un problème fréquent. Comme les recettes de cuisine, ça évite de réinventer la roue et facilite la communication entre développeurs."
+                        </div>
+                    </div>
+                </div>
+            </div>
+                
+            <div class="concept-box">
+                <h3>Qu'est-ce qu'un Design Pattern ?</h3>
+                <p>Un <strong>Design Pattern</strong> est une solution éprouvée à un problème récurrent en programmation. C'est comme une <strong>recette de cuisine</strong> que tous les développeurs connaissent.</p>
+                
+                <p><strong>Avantages :</strong></p>
+                <ul style="margin-left: 2rem; margin-top: 1rem;">
+                    <li>Code plus <strong>maintenable</strong></li>
+                    <li>Communication facilitée entre développeurs</li>
+                    <li>Solutions <strong>testées</strong> et optimisées</li>
+                    <li>Réutilisabilité du code</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h3>Les 3 patterns incontournables pour le web</h3>
+                <p><strong>🎯 Pourquoi ces 3 ?</strong> Ils couvrent 80% des besoins en développement web :</p>
+                <ul style="margin-left: 2rem; margin-top: 1rem;">
+                    <li><strong>MVC</strong> - Organisation générale de l'application</li>
+                    <li><strong>DAO</strong> - Gestion des données</li>
+                    <li><strong>Singleton</strong> - Gestion des ressources uniques</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section MVC -->
+        <div id="mvc" class="section patterns-section">
+            <h2>📋 Pattern MVC (Model-View-Controller)</h2>
+
+            <div class="intro-dropdown">
+                <div class="intro-header" onclick="toggleIntro(2)">
+                    💡 Points-clés avant de commencer : L'architecture qui révolutionne le web
+                    <span class="intro-arrow">▼</span>
+                </div>
+                <div id="intro2" class="intro-content">
+                    <div class="intro-text">
+                        <p><strong>🎯 Objectif :</strong> Comprendre l'architecture MVC utilisée par 90% des frameworks web modernes pour structurer ses applications.</p>
+
+                        <h4>⚡ Points-clés à retenir :</h4>
+                        <ul>
+                            <li><strong>Problème résolu</strong> : éviter le mélange présentation/logique/données dans le même fichier</li>
+                            <li><strong>Model</strong> = gère données et logique métier (BDD, calculs, règles)</li>
+                            <li><strong>View</strong> = interface utilisateur (HTML, CSS, templates)</li>
+                            <li><strong>Controller</strong> = chef d'orchestre qui coordonne Model et View</li>
+                        </ul>
+
+                        <h4>🔗 Dans votre métier :</h4>
+                        <p>Tous les frameworks PHP (Laravel, Symfony, CodeIgniter) et autres langages (Spring, Django, Rails) utilisent MVC. Le maîtriser vous ouvre toutes les technologies web modernes.</p>
+
+                        <div class="intro-highlight">
+                            <strong>🚨 Exemple concret :</strong> Page e-commerce sans MVC = HTML + PHP + SQL dans le même fichier de 500 lignes. Avec MVC = 3 fichiers clairs de 50 lignes chacun. Lequel préférez-vous maintenir ?
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="concept-box">
+                <h3>Le problème à résoudre</h3>
+                <p>Imaginez un site e-commerce : la <strong>présentation</strong> (HTML/CSS), la <strong>logique métier</strong> (calculs, règles) et les <strong>données</strong> (base de données) sont mélangées dans le même fichier. Résultat : un cauchemar à maintenir !</p>
+            </div>
+
+            <div class="schema">
+                <h3>Schéma MVC</h3>
+                <div class="mvc-diagram">
+                    <div class="diagram-box model">
+                        <strong>MODEL</strong><br>
+                        Données & Logique métier
+                    </div>
+                    <div class="arrow">↔️</div>
+                    <div class="diagram-box controller">
+                        <strong>CONTROLLER</strong><br>
+                        Chef d'orchestre
+                    </div>
+                    <div class="arrow">↔️</div>
+                    <div class="diagram-box view">
+                        <strong>VIEW</strong><br>
+                        Présentation (HTML)
+                    </div>
+                </div>
+                
+                <p><strong>Flux typique :</strong></p>
+                <p>Utilisateur → Controller → Model (récupère données) → Controller → View (affiche)</p>
+            </div>
+
+            <div class="concept-box">
+                <h3>Rôles détaillés</h3>
+                <p><strong>🗃️ MODEL :</strong> Gère les données (BDD), les règles métier (calculs de prix, validation)</p>
+                <p><strong>🎛️ CONTROLLER :</strong> Reçoit les requêtes utilisateur, appelle le bon Model, renvoie vers la bonne View</p>
+                <p><strong>🎨 VIEW :</strong> Interface utilisateur (HTML, CSS, JavaScript côté client)</p>
+            </div>
+
+            <div class="concept-box">
+                <h3>Frameworks utilisant MVC</h3>
+                <p><strong>PHP :</strong> Laravel, Symfony, CodeIgniter, CakePHP</p>
+                <p><strong>Autres :</strong> Spring (Java), ASP.NET MVC (C#), Django (Python), Ruby on Rails</p>
+            </div>
+
+            <div class="alert alert-success">
+                <div class="alert-icon">✅</div>
+                <div>
+                    <strong>Exemple conforme :</strong> Application avec séparation claire : contrôleur gère les routes, modèle gère la BDD, vue gère l'affichage.
+                </div>
+            </div>
+
+            <div class="alert alert-danger">
+                <div class="alert-icon">🚨</div>
+                <div>
+                    <strong>Exemple non-conforme :</strong> Tout mélangé dans index.php : HTML + requêtes SQL + calculs + logique métier dans le même fichier.
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz 1: Design Patterns -->
+        <div class="quiz-container">
+            <div class="quiz-header" onclick="toggleQuiz(1)">
+                <span>Quiz 1 : MVC et Architecture</span>
+                <span class="quiz-arrow">▼</span>
+            </div>
+            <div id="quiz1" class="quiz-content">
+                <div class="quiz-question">
+                    <div class="question-text">1. Dans le pattern MVC, quel composant gère la logique métier ?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(1, 1, false)">A) View</div>
+                        <div class="quiz-option" onclick="selectAnswer(1, 1, false)">B) Controller</div>
+                        <div class="quiz-option" onclick="selectAnswer(1, 1, true)">C) Model</div>
+                        <div class="quiz-option" onclick="selectAnswer(1, 1, false)">D) Database</div>
+                    </div>
+                    <div class="quiz-feedback">
+                        <div class="feedback-text"></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-text">2. Quel framework PHP utilise le pattern MVC ?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(1, 2, false)">A) jQuery</div>
+                        <div class="quiz-option" onclick="selectAnswer(1, 2, true)">B) Laravel</div>
+                        <div class="quiz-option" onclick="selectAnswer(1, 2, false)">C) Bootstrap</div>
+                        <div class="quiz-option" onclick="selectAnswer(1, 2, false)">D) MySQL</div>
+                    </div>
+                    <div class="quiz-feedback">
+                        <div class="feedback-text"></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-text">3. Dans MVC, qui s'occupe de l'affichage HTML ?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(1, 3, false)">A) Model</div>
+                        <div class="quiz-option" onclick="selectAnswer(1, 3, false)">B) Controller</div>
+                        <div class="quiz-option" onclick="selectAnswer(1, 3, true)">C) View</div>
+                        <div class="quiz-option" onclick="selectAnswer(1, 3, false)">D) Router</div>
+                    </div>
+                    <div class="quiz-feedback">
+                        <div class="feedback-text"></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-text">4. Le principal avantage de MVC est :</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(1, 4, true)">A) Séparation des responsabilités</div>
+                        <div class="quiz-option" onclick="selectAnswer(1, 4, false)">B) Vitesse d'exécution</div>
+                        <div class="quiz-option" onclick="selectAnswer(1, 4, false)">C) Moins de code</div>
+                        <div class="quiz-option" onclick="selectAnswer(1, 4, false)">D) Sécurité automatique</div>
+                    </div>
+                    <div class="quiz-feedback">
+                        <div class="feedback-text"></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-text">5. Le flux typique MVC est :</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(1, 5, false)">A) Model → View → Controller</div>
+                        <div class="quiz-option" onclick="selectAnswer(1, 5, true)">B) Controller → Model → View</div>
+                        <div class="quiz-option" onclick="selectAnswer(1, 5, false)">C) View → Model → Controller</div>
+                        <div class="quiz-option" onclick="selectAnswer(1, 5, false)">D) Aucun ordre particulier</div>
+                    </div>
+                    <div class="quiz-feedback">
+                        <div class="feedback-text"></div>
+                    </div>
+                </div>
+
+                <div class="quiz-score">
+                    <h4>Résultat du Quiz 1</h4>
+                    <p class="score-text"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section DAO -->
+        <div id="dao" class="section patterns-section">
+            <h2>Data Access Object (DAO)</h2>
+
+            <div class="intro-dropdown">
+                <div class="intro-header" onclick="toggleIntro(3)">
+                    Points-clés avant de commencer : Abstraire l'accès aux données
+                    <span class="intro-arrow">▼</span>
+                </div>
+                <div id="intro3" class="intro-content">
+                    <div class="intro-text">
+                        <p><strong>Objectif :</strong> Isoler l'accès aux données pour pouvoir changer de base de données sans impacter le code métier.</p>
+
+                        <h4>Points-clés à retenir :</h4>
+                        <ul>
+                            <li><strong>Problème résolu</strong> : requêtes SQL éparpillées partout dans le code</li>
+                            <li><strong>Solution DAO</strong> : une classe par entité (UserDAO, ProductDAO) avec méthodes standards</li>
+                            <li><strong>Interface commune</strong> : save(), findById(), findAll(), delete()</li>
+                            <li><strong>Changement transparent</strong> : MySQL vers PostgreSQL sans toucher au code métier</li>
+                        </ul>
+
+                        <h4>Dans votre métier :</h4>
+                        <p>Le DAO permet de changer de base de données ou d'ORM sans tout casser. Essentiel pour les applications qui évoluent ou qui doivent supporter plusieurs environnements.</p>
+
+                        <div class="intro-highlight">
+                            <strong>Exemple concret :</strong> Votre startup utilise SQLite en développement, MySQL en production, puis migre vers PostgreSQL. Avec DAO : changement d'une classe. Sans DAO : réécriture de 200 requêtes dans 50 fichiers.
+                        </div>
+                    </div>
+                </div>
+            </div>
+                
+            <div class="concept-box">
+                <h3>Le problème</h3>
+                <p>Votre code contient des requêtes SQL partout. Demain, vous passez de MySQL à PostgreSQL : tout est à réécrire !</p>
+            </div>
+
+            <div class="schema">
+                <h3>Schéma DAO</h3>
+                <div class="dao-diagram">
+                    <div class="diagram-box controller">
+                        <strong>LOGIQUE MÉTIER</strong><br>
+                        (Controller/Model)
+                    </div>
+                    <div class="arrow">⬇️</div>
+                    <div class="diagram-box dao">
+                        <strong>DAO</strong><br>
+                        Interface d'accès
+                    </div>
+                    <div class="arrow">⬇️</div>
+                    <div class="diagram-box database">
+                        <strong>BASE DE DONNÉES</strong><br>
+                        MySQL, PostgreSQL...
+                    </div>
+                </div>
+            </div>
+
+            <div class="concept-box">
+                <h3>Principe du DAO</h3>
+                <p><strong>Abstraction :</strong> Le DAO cache les détails de la base de données</p>
+                <p><strong>Interface unique :</strong> save(), findById(), delete(), findAll()</p>
+                <p><strong>Changement transparent :</strong> On change juste l'implémentation du DAO</p>
+            </div>
+
+            <div class="concept-box">
+                <h3>Structure conceptuelle du DAO</h3>
+                <p><strong>Interface standardisée :</strong> Le DAO définit un ensemble de méthodes standardisées pour manipuler les données : save(), findById(), findAll(), delete(), update(). Cette standardisation permet à n'importe quel développeur de comprendre immédiatement comment interagir avec les données.</p>
+                
+                <p><strong>Implémentations multiples :</strong> Derrière cette interface unique, vous pouvez avoir différentes implémentations : une pour MySQL, une pour PostgreSQL, une pour MongoDB, ou même une version de test qui stocke en mémoire. Le code métier reste inchangé.</p>
+                
+                <p><strong>Analogie du traducteur :</strong> Imaginez que vous dirigez une entreprise internationale. Plutôt que d'apprendre toutes les langues, vous employez des traducteurs spécialisés. Vous donnez toujours vos instructions en français (interface), et chaque traducteur (implémentation DAO) les adapte à sa langue cible. Vous pouvez changer de traducteur sans changer votre façon de communiquer.</p>
+                
+                <p><strong>Exemple de problème résolu :</strong> Une startup développe un MVP avec SQLite en local. En production, elle migre vers MySQL. Plus tard, pour des raisons de performance, certaines données migrent vers Redis. Sans DAO, chaque changement nécessite de réécrire toutes les requêtes dans tout le code. Avec DAO, seule l'implémentation de la couche d'accès change.</p>
+                
+                <p><strong>Cas d'usage typique en entreprise :</strong> Un système de gestion des ressources humaines doit fonctionner avec l'ancienne base Oracle du client et la nouvelle base PostgreSQL de l'entreprise qui rachète. Le DAO permet de créer deux implémentations sans modifier la logique métier des fiches employés, calculs de paie, etc.</p>
+            </div>
+        </div>
+
+        <!-- Section Singleton -->
+        <div id="singleton" class="section patterns-section">
+            <h2>Pattern Singleton</h2>
+
+            <div class="intro-dropdown">
+                <div class="intro-header" onclick="toggleIntro(4)">
+                    Points-clés avant de commencer : Une seule instance pour une seule ressource
+                    <span class="intro-arrow">▼</span>
+                </div>
+                <div id="intro4" class="intro-content">
+                    <div class="intro-text">
+                        <p><strong>Objectif :</strong> Garantir qu'une classe n'a qu'une seule instance dans toute l'application et fournir un point d'accès global.</p>
+
+                        <h4>Points-clés à retenir :</h4>
+                        <ul>
+                            <li><strong>Problème résolu</strong> : éviter de créer plusieurs connexions DB, configurations, ou logs</li>
+                            <li><strong>Principe</strong> : constructeur privé + méthode statique getInstance()</li>
+                            <li><strong>Cas d'usage</strong> : connexion DB, configuration, cache, système de logs</li>
+                            <li><strong>Attention</strong> : peut rendre le code difficile à tester (dépendance globale)</li>
+                        </ul>
+
+                        <h4>Dans votre métier :</h4>
+                        <p>Très utile pour les ressources coûteuses (connexions DB) ou les objets qui doivent être uniques (configuration de l'app). Mais à utiliser avec modération.</p>
+
+                        <div class="intro-highlight">
+                            <strong>Exemple concret :</strong> Sans Singleton, votre application ouvre 50 connexions à la base de données. Avec Singleton : une seule connexion partagée. Économie de ressources importante !
+                        </div>
+                    </div>
+                </div>
+            </div>
+                
+            <div class="concept-box">
+                <h3>Le problème</h3>
+                <p>Vous ouvrez 50 connexions à la base de données dans la même page. Le serveur sature ! Il faut UNE SEULE connexion partagée.</p>
+            </div>
+
+            <div class="schema">
+                <h3>Schéma Singleton</h3>
+                <div class="singleton-diagram">
+                    <div class="diagram-box singleton">
+                        <strong>SINGLETON</strong><br>
+                        Une seule instance<br>
+                        <small>getInstance()</small>
+                    </div>
+                    <div style="margin: 1rem;">
+                        <p>❌ <code>new MaClasse()</code> interdit</p>
+                        <p>✅ <code>MaClasse::getInstance()</code></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="concept-box">
+                <h3>Cas d'usage typiques</h3>
+                <ul style="margin-left: 2rem;">
+                    <li><strong>Connexion BDD :</strong> Une seule connexion pour toute l'application</li>
+                    <li><strong>Configuration :</strong> Un seul objet contenant les paramètres</li>
+                    <li><strong>Logger :</strong> Un seul système de logs</li>
+                    <li><strong>Cache :</strong> Une seule instance de cache en mémoire</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h3>Mécanisme du Singleton</h3>
+                <p><strong>Constructeur privé :</strong> La clé du pattern Singleton réside dans l'interdiction de créer des instances avec l'opérateur new habituel. Le constructeur est rendu privé, ce qui force l'utilisation d'une méthode statique spéciale (généralement getInstance()) pour obtenir l'unique instance.</p>
+                
+                <p><strong>Instance statique :</strong> La classe maintient une référence statique vers sa propre instance unique. La première fois qu'on demande l'instance, elle est créée. Les fois suivantes, la même instance est retournée.</p>
+                
+                <p><strong>Analogie du maire de ville :</strong> Dans une ville, il ne peut y avoir qu'un seul maire à la fois. Vous ne pouvez pas "créer" un nouveau maire à volonté. Si vous voulez parler au maire, vous passez par la mairie (getInstance()) qui vous met en contact avec l'unique maire en fonction.</p>
+                
+                <p><strong>Problème de conception résolu :</strong> Imaginez un système de cache global pour votre application. Sans Singleton, différentes parties du code pourraient créer plusieurs caches indépendants, perdant l'efficacité du partage des données en mémoire et créant des incohérences.</p>
+                
+                <p><strong>Cas d'usage controversé :</strong> Le Singleton est parfois considéré comme un "anti-pattern" car il introduit une dépendance globale difficile à tester. Dans un système de connexion base de données, il peut être préférable d'utiliser l'injection de dépendances plutôt qu'un Singleton pour faciliter les tests unitaires.</p>
+                
+                <p><strong>Exemple de projet problématique :</strong> Un développeur utilise un Singleton pour gérer la configuration de l'application. Le problème survient quand il faut tester différentes configurations : le Singleton rend difficile l'isolation des tests car ils partagent tous la même instance de configuration globale.</p>
+            </div>
+
+            <div class="alert alert-warning">
+                <div class="alert-icon">⚠️</div>
+                <div>
+                    <strong>Attention :</strong> Le Singleton peut rendre le code difficile à tester car il crée des dépendances globales. À utiliser avec parcimonie.
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz 2: DAO et Singleton -->
+        <div class="quiz-container">
+            <div class="quiz-header" onclick="toggleQuiz(2)">
+                <span>Quiz 2 : DAO et Singleton</span>
+                <span class="quiz-arrow">▼</span>
+            </div>
+            <div id="quiz2" class="quiz-content">
+                <div class="quiz-question">
+                    <div class="question-text">1. Quel est l'avantage principal du pattern DAO ?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(2, 1, false)">A) Accélérer les requêtes</div>
+                        <div class="quiz-option" onclick="selectAnswer(2, 1, true)">B) Abstraire l'accès aux données</div>
+                        <div class="quiz-option" onclick="selectAnswer(2, 1, false)">C) Réduire la mémoire</div>
+                        <div class="quiz-option" onclick="selectAnswer(2, 1, false)">D) Améliorer le design</div>
+                    </div>
+                    <div class="quiz-feedback">
+                        <div class="feedback-text"></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-text">2. Dans un Singleton, pourquoi le constructeur est-il privé ?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(2, 2, false)">A) Pour optimiser les performances</div>
+                        <div class="quiz-option" onclick="selectAnswer(2, 2, true)">B) Pour empêcher la création d'instances multiples</div>
+                        <div class="quiz-option" onclick="selectAnswer(2, 2, false)">C) Pour cacher les données</div>
+                        <div class="quiz-option" onclick="selectAnswer(2, 2, false)">D) Pour respecter les conventions</div>
+                    </div>
+                    <div class="quiz-feedback">
+                        <div class="feedback-text"></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-text">3. Le DAO permet de :</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(2, 3, true)">A) Changer de base de données facilement</div>
+                        <div class="quiz-option" onclick="selectAnswer(2, 3, false)">B) Accélérer les requêtes SQL</div>
+                        <div class="quiz-option" onclick="selectAnswer(2, 3, false)">C) Créer plus d'objets</div>
+                        <div class="quiz-option" onclick="selectAnswer(2, 3, false)">D) Sécuriser automatiquement</div>
+                    </div>
+                    <div class="quiz-feedback">
+                        <div class="feedback-text"></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-text">4. Un cas d'usage typique du Singleton est :</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(2, 4, true)">A) Connexion à la base de données</div>
+                        <div class="quiz-option" onclick="selectAnswer(2, 4, false)">B) Affichage des pages web</div>
+                        <div class="quiz-option" onclick="selectAnswer(2, 4, false)">C) Validation des formulaires</div>
+                        <div class="quiz-option" onclick="selectAnswer(2, 4, false)">D) Calculs mathématiques</div>
+                    </div>
+                    <div class="quiz-feedback">
+                        <div class="feedback-text"></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-text">5. L'interface DAO définit généralement :</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(2, 5, true)">A) save(), findById(), delete(), findAll()</div>
+                        <div class="quiz-option" onclick="selectAnswer(2, 5, false)">B) connect(), disconnect(), query()</div>
+                        <div class="quiz-option" onclick="selectAnswer(2, 5, false)">C) create(), read(), update(), destroy()</div>
+                        <div class="quiz-option" onclick="selectAnswer(2, 5, false)">D) get(), set(), has(), remove()</div>
+                    </div>
+                    <div class="quiz-feedback">
+                        <div class="feedback-text"></div>
+                    </div>
+                </div>
+
+                <div class="quiz-score">
+                    <h4>Résultat du Quiz 2</h4>
+                    <p class="score-text"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section POO -->
+        <div id="poo" class="section poo-section">
+            <h2>Programmation Orientée Objet en PHP</h2>
+
+            <div class="intro-dropdown">
+                <div class="intro-header" onclick="toggleIntro(5)">
+                    Points-clés avant de commencer : De la programmation procédurale à l'objet
+                    <span class="intro-arrow">▼</span>
+                </div>
+                <div id="intro5" class="intro-content">
+                    <div class="intro-text">
+                        <p><strong>Objectif :</strong> Maîtriser les concepts fondamentaux de la POO en PHP pour créer du code structuré, maintenable et réutilisable.</p>
+
+                        <h4>Points-clés à retenir :</h4>
+                        <ul>
+                            <li><strong>Changement de paradigme</strong> : passer de fonctions isolées à des objets qui encapsulent données et comportements</li>
+                            <li><strong>Avantages POO</strong> : réutilisabilité, maintenabilité, organisation, abstraction</li>
+                            <li><strong>Concepts essentiels</strong> : Classes/Objets, Encapsulation, Héritage, Polymorphisme</li>
+                            <li><strong>Bonnes pratiques</strong> : nommage cohérent, responsabilités claires, documentation</li>
+                        </ul>
+
+                        <h4>Dans votre métier :</h4>
+                        <p>La POO est la base de tous les frameworks PHP modernes. Laravel, Symfony, CodeIgniter utilisent massivement ces concepts. Les maîtriser est indispensable.</p>
+
+                        <div class="intro-highlight">
+                            <strong>Analogie :</strong> La programmation procédurale = construire une maison avec des outils éparpillés. La POO = utiliser une boîte à outils organisée où chaque outil a sa place et son rôle spécifique.
+                        </div>
+                    </div>
+                </div>
+            </div>
+                
+            <div class="spaced-content">
+                <div class="comparison-grid">
+                    <div class="comparison-card before">
+                        <div class="card-icon">📝</div>
+                        <h4>Programmation Procédurale</h4>
+                        <p>Séquence d'instructions et fonctions indépendantes. Les données et traitements sont séparés.</p>
+                        <p><strong>Analogie :</strong> Usine avec ouvriers isolés qui ne communiquent pas entre eux.</p>
+                    </div>
+                    
+                    <div class="comparison-card after">
+                        <div class="card-icon">🎯</div>
+                        <h4>Programmation Orientée Objet</h4>
+                        <p>Données et traitements regroupés dans des objets cohérents et autonomes.</p>
+                        <p><strong>Analogie :</strong> Experts spécialisés qui maîtrisent complètement leur domaine.</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="card-icon">🏢</div>
+                    <h4>Exemple : Système de Gestion Scolaire</h4>
+                    <div class="comparison-grid">
+                        <div>
+                            <strong>Approche procédurale :</strong><br>
+                            Fonctions éparpillées : calculerMoyenne(), ajouterEleve(), supprimerNote()
+                        </div>
+                        <div>
+                            <strong>Approche POO :</strong><br>
+                            Objets cohérents : Eleve, Professeur, Cours - chacun avec ses responsabilités
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="concept-box">
+                <h3>Environnement de développement</h3>
+                <p><strong>Serveur local :</strong> XAMPP, WAMP ou MAMP</p>
+                <p><strong>Éditeur :</strong> Visual Studio Code avec l'extension PHP</p>
+                <p><strong>Test de fonctionnement :</strong> Créer un fichier PHP simple pour vérifier l'installation</p>
+            </div>
+        </div>
+
+        <!-- Section Classes et Objets -->
+        <div id="classes" class="section poo-section">
+            <h2>Classes et Objets</h2>
+
+            <div class="intro-dropdown">
+                <div class="intro-header" onclick="toggleIntro(6)">
+                    Points-clés avant de commencer : Le moule et l'objet créé
+                    <span class="intro-arrow">▼</span>
+                </div>
+                <div id="intro6" class="intro-content">
+                    <div class="intro-text">
+                        <p><strong>Objectif :</strong> Comprendre la différence fondamentale entre une classe (le modèle) et un objet (l'instance) pour structurer efficacement son code.</p>
+
+                        <h4>Points-clés à retenir :</h4>
+                        <ul>
+                            <li><strong>Classe</strong> = plan de construction, modèle, template (comme un plan d'architecte)</li>
+                            <li><strong>Objet</strong> = instance créée à partir de la classe (comme une maison construite selon le plan)</li>
+                            <li><strong>$this</strong> = référence à l'objet courant dans les méthodes</li>
+                            <li><strong>new</strong> = mot-clé pour créer une nouvelle instance</li>
+                        </ul>
+
+                        <h4>Dans votre métier :</h4>
+                        <p>Bien distinguer classe et objet évite les confusions fréquentes chez les débutants et permet de mieux concevoir ses applications.</p>
+
+                        <div class="intro-highlight">
+                            <strong>Analogie concrète :</strong> Classe "Voiture" = les plans du constructeur. Objets = votre Clio rouge, la BMW de votre voisin, la Tesla du parking. Même modèle, instances différentes.
+                        </div>
+                    </div>
+                </div>
+            </div>
+                
+            <div class="concept-box">
+                <h3>Classe vs Objet : L'analogie du moule</h3>
+                <p><strong>Classe :</strong> Le moule à gâteau (le plan, la définition)</p>
+                <p><strong>Objet :</strong> Le gâteau créé avec le moule (l'instance)</p>
+                
+                <div style="text-align: center; margin: 2rem 0;">
+                    <p>Classe "Voiture" → Objets : ma Clio, ta BMW, sa Tesla</p>
+                </div>
+            </div>
+
+            <div class="spaced-content">
+                <div class="info-cards">
+                    <div class="info-card">
+                        <div class="card-icon">🏗️</div>
+                        <div class="card-title">Les Propriétés</div>
+                        <div class="card-content">
+                            Caractéristiques qui définissent l'état d'un objet. Elles stockent les informations spécifiques à chaque instance.
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="card-icon">⚙️</div>
+                        <div class="card-title">Le Constructeur</div>
+                        <div class="card-content">
+                            Méthode spéciale qui s'exécute automatiquement lors de la création. Initialise les propriétés avec des valeurs cohérentes.
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="card-icon">🎯</div>
+                        <div class="card-title">Les Méthodes</div>
+                        <div class="card-content">
+                            Actions que l'objet peut effectuer. Elles définissent le comportement et permettent les interactions.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="card-icon">⚒️</div>
+                    <h4>Analogie : L'Atelier Artisanal</h4>
+                    <div class="key-points">
+                        <div class="key-point">
+                            <div class="key-point-icon">📋</div>
+                            <div class="key-point-text"><strong>Fiche d'identité</strong> → Propriétés (nom, expérience, spécialités)</div>
+                        </div>
+                        <div class="key-point">
+                            <div class="key-point-icon">🎓</div>
+                            <div class="key-point-text"><strong>Formation initiale</strong> → Constructeur (compétences de base)</div>
+                        </div>
+                        <div class="key-point">
+                            <div class="key-point-icon">🔧</div>
+                            <div class="key-point-text"><strong>Savoir-faire</strong> → Méthodes (réparer, ajuster, créer)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="card-icon">🛒</div>
+                    <h4>Exemple : Système E-commerce</h4>
+                    <div class="comparison-grid">
+                        <div>
+                            <strong>Propriétés Produit :</strong><br>
+                            nom, prix, stock, description, catégorie
+                        </div>
+                        <div>
+                            <strong>Méthodes Produit :</strong><br>
+                            calculerPrixTTC(), verifierStock(), appliquerPromo()
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="concept-box">
+                <h3>Mots-clés importants</h3>
+                <p><strong>$this</strong> → Fait référence à l'objet actuel (cette voiture-ci)</p>
+                <p><strong>new</strong> → Crée une nouvelle instance de la classe</p>
+                <p><strong>__construct()</strong> → Méthode spéciale appelée à la création</p>
+                <p><strong>-></strong> → Opérateur pour accéder aux propriétés/méthodes</p>
+            </div>
+        </div>
+
+        <!-- Quiz 3: Classes et Objets -->
+        <div class="quiz-container">
+            <div class="quiz-header" onclick="toggleQuiz(3)">
+                <span>Quiz 3 : Classes et Objets</span>
+                <span class="quiz-arrow">▼</span>
+            </div>
+            <div id="quiz3" class="quiz-content">
+                <div class="quiz-question">
+                    <div class="question-text">1. Quelle est la différence entre une classe et un objet ?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(3, 1, false)">A) Il n'y en a pas</div>
+                        <div class="quiz-option" onclick="selectAnswer(3, 1, true)">B) La classe est le modèle, l'objet est l'instance</div>
+                        <div class="quiz-option" onclick="selectAnswer(3, 1, false)">C) L'objet est plus grand que la classe</div>
+                        <div class="quiz-option" onclick="selectAnswer(3, 1, false)">D) La classe contient des objets</div>
+                    </div>
+                    <div class="quiz-feedback">
+                        <div class="feedback-text"></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-text">2. Que signifie $this en PHP ?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(3, 2, false)">A) Une variable globale</div>
+                        <div class="quiz-option" onclick="selectAnswer(3, 2, true)">B) L'objet courant</div>
+                        <div class="quiz-option" onclick="selectAnswer(3, 2, false)">C) La classe parente</div>
+                        <div class="quiz-option" onclick="selectAnswer(3, 2, false)">D) Une constante</div>
+                    </div>
+                    <div class="quiz-feedback">
+                        <div class="feedback-text"></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-text">3. Quand est appelée la méthode __construct() ?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(3, 3, false)">A) À la destruction de l'objet</div>
+                        <div class="quiz-option" onclick="selectAnswer(3, 3, true)">B) À la création de l'objet</div>
+                        <div class="quiz-option" onclick="selectAnswer(3, 3, false)">C) À chaque appel de méthode</div>
+                        <div class="quiz-option" onclick="selectAnswer(3, 3, false)">D) Manuellement uniquement</div>
+                    </div>
+                    <div class="quiz-feedback">
+                        <div class="feedback-text"></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-text">4. Comment crée-t-on un objet en PHP ?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(3, 4, false)">A) create Classe()</div>
+                        <div class="quiz-option" onclick="selectAnswer(3, 4, true)">B) new Classe()</div>
+                        <div class="quiz-option" onclick="selectAnswer(3, 4, false)">C) make Classe()</div>
+                        <div class="quiz-option" onclick="selectAnswer(3, 4, false)">D) instance Classe()</div>
+                    </div>
+                    <div class="quiz-feedback">
+                        <div class="feedback-text"></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-text">5. Une classe peut-elle avoir plusieurs constructeurs en PHP ?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(3, 5, false)">A) Oui, autant qu'on veut</div>
+                        <div class="quiz-option" onclick="selectAnswer(3, 5, true)">B) Non, un seul __construct()</div>
+                        <div class="quiz-option" onclick="selectAnswer(3, 5, false)">C) Oui, mais maximum 3</div>
+                        <div class="quiz-option" onclick="selectAnswer(3, 5, false)">D) Ça dépend de la version PHP</div>
+                    </div>
+                    <div class="quiz-feedback">
+                        <div class="feedback-text"></div>
+                    </div>
+                </div>
+
+                <div class="quiz-score">
+                    <h4>Résultat du Quiz 3</h4>
+                    <p class="score-text"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Encapsulation -->
+        <div id="encapsulation" class="section poo-section">
+            <h2>Encapsulation et Visibilité</h2>
+
+            <div class="intro-dropdown">
+                <div class="intro-header" onclick="toggleIntro(7)">
+                    Points-clés avant de commencer : Protéger et contrôler l'accès aux données
+                    <span class="intro-arrow">▼</span>
+                </div>
+                <div id="intro7" class="intro-content">
+                    <div class="intro-text">
+                        <p><strong>Objectif :</strong> Maîtriser l'encapsulation pour créer des objets robustes qui protègent leurs données et offrent un contrôle fin sur leur utilisation.</p>
+
+                        <h4>Points-clés à retenir :</h4>
+                        <ul>
+                            <li><strong>Encapsulation</strong> = cacher les détails internes et contrôler l'accès aux données</li>
+                            <li><strong>Public</strong> = accessible partout (interfaces, méthodes principales)</li>
+                            <li><strong>Private</strong> = accessible uniquement dans la classe (données sensibles)</li>
+                            <li><strong>Protected</strong> = accessible dans la classe et ses enfants (héritage)</li>
+                        </ul>
+
+                        <h4>Dans votre métier :</h4>
+                        <p>L'encapsulation évite les erreurs de manipulation et rend le code plus sûr. Essentiel pour les applications robustes et la collaboration en équipe.</p>
+
+                        <div class="intro-highlight">
+                            <strong>Analogie :</strong> Votre voiture - vous pouvez utiliser le volant et les pédales (public), mais vous ne devez pas toucher directement au moteur (private). Le tableau de bord avancé est réservé au mécanicien (protected).
+                        </div>
+                    </div>
+                </div>
+            </div>
+                
+            <div class="concept-box">
+                <h3>Le principe de l'encapsulation</h3>
+                <p>L'<strong>encapsulation</strong> consiste à cacher les détails internes d'un objet et à contrôler l'accès à ses données.</p>
+                
+                <p><strong>Analogie :</strong> Votre voiture</p>
+                <ul style="margin-left: 2rem;">
+                    <li><strong>Public :</strong> Volant, pédales → Vous pouvez les utiliser</li>
+                    <li><strong>Private :</strong> Moteur interne → Vous ne devez pas y toucher directement</li>
+                    <li><strong>Protected :</strong> Tableau de bord avancé → Seul un mécanicien peut modifier</li>
+                </ul>
+            </div>
+
+            <div class="spaced-content">
+                <div class="info-cards">
+                    <div class="info-card">
+                        <div class="card-icon">🔓</div>
+                        <div class="card-title">Public</div>
+                        <div class="card-content">
+                            Accessible partout dans l'application. Interface officielle de votre objet.
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="card-icon">🔒</div>
+                        <div class="card-title">Private</div>
+                        <div class="card-content">
+                            Accessible uniquement dans la classe. Détails d'implémentation secrets.
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="card-icon">🔐</div>
+                        <div class="card-title">Protected</div>
+                        <div class="card-content">
+                            Accessible dans la classe et ses enfants. Partagé avec les classes dérivées.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="card-icon">🏢</div>
+                    <h4>Analogie : L'Entreprise</h4>
+                    <div class="key-points">
+                        <div class="key-point">
+                            <div class="key-point-icon">🔓</div>
+                            <div class="key-point-text"><strong>Service client</strong> → Public (accessible à tous)</div>
+                        </div>
+                        <div class="key-point">
+                            <div class="key-point-icon">🔐</div>
+                            <div class="key-point-text"><strong>Réunions de direction</strong> → Protected (cadres et équipes)</div>
+                        </div>
+                        <div class="key-point">
+                            <div class="key-point-icon">🔒</div>
+                            <div class="key-point-text"><strong>Stratégie financière</strong> → Private (directeur uniquement)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="card-icon">🏦</div>
+                    <h4>Problème Typique : Système Bancaire</h4>
+                    <p>Le solde du compte doit être <strong>privé</strong> pour éviter les modifications accidentelles. Les méthodes de dépôt/retrait sont <strong>publiques</strong> car elles incluent toutes les validations.</p>
+                </div>
+            </div>
+
+            <div class="spaced-content">
+                <h4>Getters et Setters : Le Contrôle d'Accès</h4>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-card after">
+                        <div class="card-icon">🔍</div>
+                        <h5>Getters</h5>
+                        <p>Méthodes pour <strong>lire</strong> les propriétés privées de manière contrôlée.</p>
+                        <p>Peuvent formater les données avant retour.</p>
+                    </div>
+                    
+                    <div class="comparison-card after">
+                        <div class="card-icon">✏️</div>
+                        <h5>Setters</h5>
+                        <p>Méthodes pour <strong>modifier</strong> les propriétés avec validation.</p>
+                        <p>Vérifient la cohérence avant stockage.</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="card-icon">🔐</div>
+                    <h4>Analogie : Le Coffre-Fort</h4>
+                    <p>Vous ne donnez pas la combinaison à tout le monde. Vous contrôlez l'accès : vérification d'identité, traçabilité, conditions d'accès.</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="card-icon">🛒</div>
+                    <h4>Cas E-commerce : Gestion des Prix</h4>
+                    <div class="key-points">
+                        <div class="key-point">
+                            <div class="key-point-icon">✅</div>
+                            <div class="key-point-text">Setter vérifie que le prix est positif</div>
+                        </div>
+                        <div class="key-point">
+                            <div class="key-point-icon">📝</div>
+                            <div class="key-point-text">Log automatique des modifications</div>
+                        </div>
+                        <div class="key-point">
+                            <div class="key-point-icon">🔔</div>
+                            <div class="key-point-text">Notification si changement important</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="concept-box">
+                <h3>Pourquoi l'encapsulation ?</h3>
+                <ul style="margin-left: 2rem;">
+                    <li><strong>Sécurité :</strong> Empêche les modifications non autorisées</li>
+                    <li><strong>Validation :</strong> Contrôle les données avant stockage</li>
+                    <li><strong>Maintenance :</strong> Peut changer l'implémentation interne sans casser le code externe</li>
+                    <li><strong>Cohérence :</strong> Garantit que l'objet reste dans un état valide</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Quiz 4: Encapsulation -->
+        <div class="quiz-container">
+            <div class="quiz-header" onclick="toggleQuiz(4)">
+                <span>Quiz 4 : Encapsulation</span>
+                <span class="quiz-arrow">▼</span>
+            </div>
+            <div id="quiz4" class="quiz-content">
+                <div class="quiz-question">
+                    <div class="question-text">1. Une propriété 'private' est accessible :</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(4, 1, false)">A) Partout dans l'application</div>
+                        <div class="quiz-option" onclick="selectAnswer(4, 1, true)">B) Uniquement dans la classe où elle est définie</div>
+                        <div class="quiz-option" onclick="selectAnswer(4, 1, false)">C) Dans toutes les classes du même fichier</div>
+                        <div class="quiz-option" onclick="selectAnswer(4, 1, false)">D) Nulle part</div>
+                    </div>
+                    <div class="quiz-feedback">
+                        <div class="feedback-text"></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-text">2. Quel est le rôle d'un getter ?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(4, 2, false)">A) Modifier une propriété privée</div>
+                        <div class="quiz-option" onclick="selectAnswer(4, 2, true)">B) Lire une propriété privée</div>
+                        <div class="quiz-option" onclick="selectAnswer(4, 2, false)">C) Créer un objet</div>
+                        <div class="quiz-option" onclick="selectAnswer(4, 2, false)">D) Détruire un objet</div>
+                    </div>
+                    <div class="quiz-feedback">
+                        <div class="feedback-text"></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-text">3. Pourquoi utiliser un setter plutôt qu'un accès direct ?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(4, 3, false)">A) C'est plus rapide</div>
+                        <div class="quiz-option" onclick="selectAnswer(4, 3, true)">B) Pour valider les données</div>
+                        <div class="quiz-option" onclick="selectAnswer(4, 3, false)">C) C'est obligatoire en PHP</div>
+                        <div class="quiz-option" onclick="selectAnswer(4, 3, false)">D) Pour économiser la mémoire</div>
+                    </div>
+                    <div class="quiz-feedback">
+                        <div class="feedback-text"></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-text">4. Une propriété 'protected' est accessible :</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(4, 4, false)">A) Partout</div>
+                        <div class="quiz-option" onclick="selectAnswer(4, 4, true)">B) Dans la classe et ses classes filles</div>
+                        <div class="quiz-option" onclick="selectAnswer(4, 4, false)">C) Uniquement dans la classe courante</div>
+                        <div class="quiz-option" onclick="selectAnswer(4, 4, false)">D) Nulle part</div>
+                    </div>
+                    <div class="quiz-feedback">
+                        <div class="feedback-text"></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-text">5. L'encapsulation permet principalement :</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(4, 5, false)">A) D'accélérer le code</div>
+                        <div class="quiz-option" onclick="selectAnswer(4, 5, true)">B) De protéger les données et contrôler l'accès</div>
+                        <div class="quiz-option" onclick="selectAnswer(4, 5, false)">C) De réduire la taille du code</div>
+                        <div class="quiz-option" onclick="selectAnswer(4, 5, false)">D) D'améliorer le design visuel</div>
+                    </div>
+                    <div class="quiz-feedback">
+                        <div class="feedback-text"></div>
+                    </div>
+                </div>
+
+                <div class="quiz-score">
+                    <h4>Résultat du Quiz 4</h4>
+                    <p class="score-text"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Héritage -->
+        <div id="heritage" class="section poo-section">
+            <h2>Héritage et Concepts Avancés</h2>
+
+            <div class="intro-dropdown">
+                <div class="intro-header" onclick="toggleIntro(8)">
+                    Points-clés avant de commencer : Réutiliser et étendre le code existant
+                    <span class="intro-arrow">▼</span>
+                </div>
+                <div id="intro8" class="intro-content">
+                    <div class="intro-text">
+                        <p><strong>Objectif :</strong> Comprendre l'héritage pour créer des hiérarchies de classes et réutiliser efficacement le code existant.</p>
+
+                        <h4>Points-clés à retenir :</h4>
+                        <ul>
+                            <li><strong>Héritage</strong> = une classe enfant hérite des propriétés et méthodes de sa classe parente</li>
+                            <li><strong>extends</strong> = mot-clé pour créer une relation d'héritage</li>
+                            <li><strong>parent::</strong> = accéder aux méthodes de la classe parente</li>
+                            <li><strong>Redéfinition</strong> = override des méthodes parentes pour adapter le comportement</li>
+                        </ul>
+
+                        <h4>Dans votre métier :</h4>
+                        <p>L'héritage évite la duplication de code et permet de créer des architectures flexibles. Très utilisé dans les frameworks pour étendre les fonctionnalités de base.</p>
+
+                        <div class="intro-highlight">
+                            <strong>Attention :</strong> L'héritage peut créer des dépendances fortes. Privilégier la composition quand l'héritage devient complexe.
+                        </div>
+                    </div>
+                </div>
+            </div>
+                
+            <div class="concept-box">
+                <h3>L'héritage : réutiliser et spécialiser</h3>
+                <p><strong>Principe fondamental :</strong> L'héritage permet à une classe enfant d'acquérir automatiquement toutes les propriétés et méthodes de sa classe parente, tout en ayant la possibilité d'ajouter ses propres spécificités ou de modifier le comportement hérité.</p>
+                
+                <p><strong>Hiérarchie naturelle :</strong> Dans la nature comme en programmation, on observe des relations d'héritage. Un mammifère hérite des caractéristiques générales des vertébrés, mais ajoute ses spécificités (allaitement, poils). Un chien hérite des caractéristiques des mammifères mais ajoute ses comportements spécifiques.</p>
+                
+                <p><strong>Analogie professionnelle :</strong> Considérez la hiérarchie dans une entreprise. Un employé de base a certaines compétences et responsabilités. Un manager hérite de toutes ces compétences d'employé (il sait faire le travail de base) mais ajoute des compétences spécifiques (gestion d'équipe, planification). Un directeur hérite des compétences de manager et ajoute les siennes (stratégie, vision globale).</p>
+                
+                <p><strong>Redéfinition et spécialisation :</strong> Une classe enfant peut redéfinir le comportement d'une méthode héritée pour l'adapter à ses besoins spécifiques. C'est comme un chef cuisinier qui prend une recette de base et l'adapte selon son style et sa clientèle.</p>
+                
+                <p><strong>Exemple de projet de gestion documentaire :</strong> Vous avez une classe Document avec des propriétés générales (titre, auteur, dateCreation) et des méthodes communes (ouvrir, fermer, sauvegarder). Ensuite, DocumentPDF hérite de Document mais ajoute des méthodes spécifiques (compresser, protegerParMotDePasse). DocumentWord hérite aussi de Document mais redéfinit la méthode sauvegarder pour gérer les formats Word spécifiques.</p>
+            </div>
+
+            <div class="concept-box">
+                <h3>Concepts avancés de la POO</h3>
+                
+                <h4>Le Polymorphisme</h4>
+                <p><strong>Définition :</strong> Le polymorphisme permet à des objets de différentes classes de répondre à la même méthode, mais chacun à sa manière. C'est la capacité d'un même nom de méthode à produire des comportements différents selon l'objet qui l'exécute.</p>
+                
+                <p><strong>Analogie de l'orchestre :</strong> Quand le chef d'orchestre dit "jouez", chaque musicien exécute cette instruction différemment : le pianiste appuie sur des touches, le violoniste passe l'archet, le trompettiste souffle. Même instruction, comportements différents selon l'instrument.</p>
+                
+                <p><strong>Avantage en projet :</strong> Dans un système de notification, vous pouvez avoir une méthode envoyer() commune à EmailNotification, SMSNotification, PushNotification. Chaque classe implémente cette méthode selon son canal, mais le code qui utilise ces objets n'a pas besoin de connaître les détails.</p>
+
+                <h4>Classes abstraites</h4>
+                <p><strong>Concept :</strong> Une classe abstraite est un modèle incomplet qui ne peut pas être instancié directement. Elle définit une structure commune et impose certaines méthodes à ses classes filles, tout en pouvant fournir des implémentations partielles.</p>
+                
+                <p><strong>Analogie du patron couture :</strong> Un patron de vêtement est abstrait : il définit la forme générale mais vous devez choisir le tissu, les couleurs, les finitions pour créer un vêtement concret. Le patron impose certaines contraintes (emplacement des coutures) mais laisse des choix d'implémentation.</p>
+
+                <h4>Interfaces</h4>
+                <p><strong>Définition :</strong> Une interface définit un contrat : elle spécifie quelles méthodes une classe doit implémenter, sans fournir l'implémentation. C'est une garantie que toute classe qui "signe" ce contrat fournira certains services.</p>
+                
+                <p><strong>Analogie de la norme :</strong> Une prise électrique est une interface : elle définit un standard (forme, voltage) que tout appareil doit respecter pour se brancher. Peu importe comment l'appareil fonctionne à l'intérieur, s'il respecte l'interface, il peut se connecter au réseau.</p>
+                
+                <p><strong>Cas d'usage typique :</strong> Dans un système de paiement e-commerce, vous définissez une interface PaiementProcessor avec une méthode traiterPaiement(). Ensuite, PayPalProcessor, StripeProcessor, BankTransferProcessor implémentent cette interface, chacun à sa manière, mais le système de commande peut les utiliser de façon uniforme.</p>
+            </div>
+        </div>
+
+        <!-- Quiz 5: Héritage -->
+        <div class="quiz-container">
+            <div class="quiz-header" onclick="toggleQuiz(5)">
+                <span>Quiz 5 : Héritage et Concepts Avancés</span>
+                <span class="quiz-arrow">▼</span>
+            </div>
+            <div id="quiz5" class="quiz-content">
+                <div class="quiz-question">
+                    <div class="question-text">1. Le mot-clé 'extends' permet :</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(5, 1, false)">A) De créer un objet</div>
+                        <div class="quiz-option" onclick="selectAnswer(5, 1, true)">B) D'hériter d'une classe</div>
+                        <div class="quiz-option" onclick="selectAnswer(5, 1, false)">C) De détruire une classe</div>
+                        <div class="quiz-option" onclick="selectAnswer(5, 1, false)">D) De copier une classe</div>
+                    </div>
+                    <div class="quiz-feedback">
+                        <div class="feedback-text"></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-text">2. 'parent::__construct()' sert à :</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(5, 2, false)">A) Créer un nouvel objet parent</div>
+                        <div class="quiz-option" onclick="selectAnswer(5, 2, true)">B) Appeler le constructeur de la classe parente</div>
+                        <div class="quiz-option" onclick="selectAnswer(5, 2, false)">C) Détruire le parent</div>
+                        <div class="quiz-option" onclick="selectAnswer(5, 2, false)">D) Copier le parent</div>
+                    </div>
+                    <div class="quiz-feedback">
+                        <div class="feedback-text"></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-text">3. Une propriété 'protected' est visible :</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(5, 3, false)">A) Partout</div>
+                        <div class="quiz-option" onclick="selectAnswer(5, 3, true)">B) Dans la classe et ses enfants</div>
+                        <div class="quiz-option" onclick="selectAnswer(5, 3, false)">C) Nulle part</div>
+                        <div class="quiz-option" onclick="selectAnswer(5, 3, false)">D) Uniquement dans la classe courante</div>
+                    </div>
+                    <div class="quiz-feedback">
+                        <div class="feedback-text"></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-text">4. Le polymorphisme permet :</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(5, 4, false)">A) D'avoir plusieurs constructeurs</div>
+                        <div class="quiz-option" onclick="selectAnswer(5, 4, true)">B) Des comportements différents pour une même méthode</div>
+                        <div class="quiz-option" onclick="selectAnswer(5, 4, false)">C) De créer plusieurs objets</div>
+                        <div class="quiz-option" onclick="selectAnswer(5, 4, false)">D) De détruire des objets</div>
+                    </div>
+                    <div class="quiz-feedback">
+                        <div class="feedback-text"></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-text">5. Une classe abstraite :</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(5, 5, false)">A) Peut être instanciée directement</div>
+                        <div class="quiz-option" onclick="selectAnswer(5, 5, true)">B) Ne peut pas être instanciée directement</div>
+                        <div class="quiz-option" onclick="selectAnswer(5, 5, false)">C) N'a pas de méthodes</div>
+                        <div class="quiz-option" onclick="selectAnswer(5, 5, false)">D) Est identique à une interface</div>
+                    </div>
+                    <div class="quiz-feedback">
+                        <div class="feedback-text"></div>
+                    </div>
+                </div>
+
+                <div class="quiz-score">
+                    <h4>Résultat du Quiz 5</h4>
+                    <p class="score-text"></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Variables globales pour les quiz
+        let quizScores = {};
+
+        // Fonctions pour les menus déroulants
+        function toggleIntro(id) {
+            const content = document.getElementById('intro' + id);
+            const arrow = content.previousElementSibling.querySelector('.intro-arrow');
+            
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                arrow.classList.remove('open');
+            } else {
+                content.classList.add('open');
+                arrow.classList.add('open');
+            }
+        }
+
+        function toggleQuiz(id) {
+            const content = document.getElementById('quiz' + id);
+            const arrow = content.previousElementSibling.querySelector('.quiz-arrow');
+            
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                arrow.classList.remove('open');
+            } else {
+                content.classList.add('open');
+                arrow.classList.add('open');
+            }
+        }
+
+        // Fonction pour gérer les réponses aux quiz
+        function selectAnswer(quizId, questionId, isCorrect) {
+            const quizContainer = document.getElementById('quiz' + quizId);
+            const questions = quizContainer.querySelectorAll('.quiz-question');
+            const currentQuestion = questions[questionId - 1];
+            const options = currentQuestion.querySelectorAll('.quiz-option');
+            const feedback = currentQuestion.querySelector('.quiz-feedback');
+            const feedbackText = feedback.querySelector('.feedback-text');
+
+            // Initialize quiz score if not exists
+            if (!quizScores[quizId]) {
+                quizScores[quizId] = { correct: 0, total: 0, answered: new Set() };
+            }
+
+            // Check if this question was already answered
+            if (quizScores[quizId].answered.has(questionId)) {
+                return; // Already answered, do nothing
+            }
+
+            // Mark question as answered
+            quizScores[quizId].answered.add(questionId);
+            quizScores[quizId].total++;
+
+            // Reset all options
+            options.forEach(option => {
+                option.classList.remove('correct', 'incorrect');
+                option.style.cursor = 'default';
+            });
+
+            // Mark the clicked option
+            event.target.classList.add(isCorrect ? 'correct' : 'incorrect');
+
+            // Update score
+            if (isCorrect) {
+                quizScores[quizId].correct++;
+                feedbackText.textContent = 'Correct ! 👍';
+                feedback.classList.add('feedback-correct');
+            } else {
+                feedbackText.textContent = 'Incorrect. La bonne réponse était mise en évidence. 📖';
+                feedback.classList.add('feedback-incorrect');
+                
+                // Show correct answer
+                options.forEach(option => {
+                    if (option.onclick.toString().includes('true')) {
+                        option.classList.add('correct');
+                    }
+                });
+            }
+
+            // Show feedback
+            feedback.classList.add('show');
+
+            // Disable all options for this question
+            options.forEach(option => {
+                option.style.pointerEvents = 'none';
+            });
+
+            // Check if all questions are answered
+            const totalQuestions = questions.length;
+            if (quizScores[quizId].answered.size === totalQuestions) {
+                updateQuizScore(quizId);
+            }
+        }
+
+        // Function to update final quiz score
+        function updateQuizScore(quizId) {
+            const quizContainer = document.getElementById('quiz' + quizId);
+            const scoreContainer = quizContainer.querySelector('.quiz-score');
+            const scoreText = scoreContainer.querySelector('.score-text');
+            
+            const score = quizScores[quizId];
+            const percentage = Math.round((score.correct / score.total) * 100);
+            
+            let message = `Score: ${score.correct}/${score.total} (${percentage}%)`;
+            
+            if (percentage >= 80) {
+                message += " - Excellent ! 🎉";
+            } else if (percentage >= 60) {
+                message += " - Bien ! 👍";
+            } else {
+                message += " - À revoir 📚";
+            }
+            
+            scoreText.textContent = message;
+            scoreContainer.classList.add('show');
+        }
+
+        // Navigation smooth scroll
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Progress indicator
+        window.addEventListener('scroll', function() {
+            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            const nav = document.querySelector('nav');
+            nav.style.background = `linear-gradient(90deg, #3498db ${scrolled}%, #34495e ${scrolled}%)`;
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Any initialization code can go here
+            console.log('Cours POO et Design Patterns chargé avec succès !');
+        });
+    </script>
+</body>
+</html>
